@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using WebApi.Entities;
+using CPMS.Common.EF;
+using CPMS.Common.Entities;
 using WebApi.Helpers;
 
 namespace WebApi.Services

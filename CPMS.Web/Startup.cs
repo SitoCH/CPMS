@@ -12,6 +12,8 @@ using WebApi.Services;
 using AutoMapper;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using CPMS.Common.EF;
+using CPMS.Common.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 
@@ -30,7 +32,8 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddDbContext<DataContext>(x => x.UseInMemoryDatabase("TestDb"));
+            //services.AddDbContext<DataContext>(x => x.UseInMemoryDatabase("TestDb"));
+            //services.AddDbContext<DataContext>(x => x.UseMySQL("server=localhost;database=CPMS;uid=root;pwd=123456"));
             services.AddMvc();
             services.AddAutoMapper();
 

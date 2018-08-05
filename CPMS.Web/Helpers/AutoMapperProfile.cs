@@ -1,6 +1,6 @@
 using AutoMapper;
+using CPMS.Common.Entities;
 using WebApi.Dtos;
-using WebApi.Entities;
 
 namespace WebApi.Helpers
 {

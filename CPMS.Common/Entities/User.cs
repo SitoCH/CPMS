@@ -1,4 +1,4 @@
-namespace WebApi.Entities
+namespace CPMS.Common.Entities
 {
     public class User
     {
