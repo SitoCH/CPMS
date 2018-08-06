@@ -21,11 +21,15 @@ namespace CPMS.Common.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Name");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
                     b.ToTable("Companies");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Compagnia 40" }
+                    );
                 });
 
             modelBuilder.Entity("CPMS.Common.Entities.Group", b =>
@@ -33,9 +37,20 @@ namespace CPMS.Common.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Name");
+
+                    b.Property<int>("SectionId");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("SectionId");
+
                     b.ToTable("Groups");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Gruppo 1", SectionId = 1 },
+                        new { Id = 2, Name = "Gruppo 2", SectionId = 1 }
+                    );
                 });
 
             modelBuilder.Entity("CPMS.Common.Entities.Section", b =>
@@ -43,9 +58,19 @@ namespace CPMS.Common.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("CompanyId");
+
+                    b.Property<string>("Name");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("CompanyId");
+
                     b.ToTable("Sections");
+
+                    b.HasData(
+                        new { Id = 1, CompanyId = 1, Name = "Sezione 1" }
+                    );
                 });
 
             modelBuilder.Entity("CPMS.Common.Entities.User", b =>
@@ -54,6 +79,8 @@ namespace CPMS.Common.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("FirstName");
+
+                    b.Property<int>("GroupId");
 
                     b.Property<string>("LastName");
 
@@ -65,7 +92,33 @@ namespace CPMS.Common.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GroupId");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("CPMS.Common.Entities.Group", b =>
+                {
+                    b.HasOne("CPMS.Common.Entities.Section", "Section")
+                        .WithMany("Groups")
+                        .HasForeignKey("SectionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CPMS.Common.Entities.Section", b =>
+                {
+                    b.HasOne("CPMS.Common.Entities.Company", "Company")
+                        .WithMany("Sections")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CPMS.Common.Entities.User", b =>
+                {
+                    b.HasOne("CPMS.Common.Entities.Group", "Group")
+                        .WithMany("Users")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
