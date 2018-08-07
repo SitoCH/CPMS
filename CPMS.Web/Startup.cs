@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -29,8 +30,12 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = _configuration["CPMSConnectionString"];
+            if (string.IsNullOrWhiteSpace(connectionString))
+                throw new Exception("Configuration property 'CPMSConnectionString' not found!");
+            services.AddDbContext<DataContext>(x => x.UseMySql(connectionString));
+
             services.AddCors();
-            services.AddDbContext<DataContext>(x => x.UseMySql(_configuration["CPMS:ConnectionString"]));
             services.AddMvc();
             services.AddAutoMapper();
 
