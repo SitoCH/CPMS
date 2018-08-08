@@ -16,22 +16,6 @@ namespace CPMS.Common.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.0-rtm-30799");
 
-            modelBuilder.Entity("CPMS.Common.Entities.Company", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Companies");
-
-                    b.HasData(
-                        new { Id = 1, Name = "Compagnia 40" }
-                    );
-                });
-
             modelBuilder.Entity("CPMS.Common.Entities.Group", b =>
                 {
                     b.Property<int>("Id")
@@ -39,38 +23,13 @@ namespace CPMS.Common.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("SectionId");
+                    b.Property<int>("ParentId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SectionId");
+                    b.HasIndex("ParentId");
 
                     b.ToTable("Groups");
-
-                    b.HasData(
-                        new { Id = 1, Name = "Gruppo 1", SectionId = 1 },
-                        new { Id = 2, Name = "Gruppo 2", SectionId = 1 }
-                    );
-                });
-
-            modelBuilder.Entity("CPMS.Common.Entities.Section", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("CompanyId");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
-
-                    b.ToTable("Sections");
-
-                    b.HasData(
-                        new { Id = 1, CompanyId = 1, Name = "Sezione 1" }
-                    );
                 });
 
             modelBuilder.Entity("CPMS.Common.Entities.User", b =>
@@ -99,17 +58,9 @@ namespace CPMS.Common.Migrations
 
             modelBuilder.Entity("CPMS.Common.Entities.Group", b =>
                 {
-                    b.HasOne("CPMS.Common.Entities.Section", "Section")
-                        .WithMany("Groups")
-                        .HasForeignKey("SectionId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CPMS.Common.Entities.Section", b =>
-                {
-                    b.HasOne("CPMS.Common.Entities.Company", "Company")
-                        .WithMany("Sections")
-                        .HasForeignKey("CompanyId")
+                    b.HasOne("CPMS.Common.Entities.Group", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
