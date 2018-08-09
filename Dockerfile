@@ -32,4 +32,5 @@ ENV CPMSConnectionString=""
 EXPOSE 4000/tcp
 WORKDIR /app
 COPY --from=build /app/CPMS.Web/out ./
+COPY --from=build /app/CPMS.Web/wwwroot ./wwwroot
 ENTRYPOINT ["dotnet", "CPMS.Web.dll"]
