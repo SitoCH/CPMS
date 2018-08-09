@@ -12,14 +12,14 @@ namespace WebApi.Services
         User Authenticate(string username, string password);
         IEnumerable<User> GetAll();
         User GetById(int id);
-        User Create(User user, string password);
+        User Create(User user, string password, int groupId);
         void Update(User user, string password = null);
         void Delete(int id);
     }
 
     public class UserService : IUserService
     {
-        private DataContext _context;
+        private readonly DataContext _context;
 
         public UserService(DataContext context)
         {
@@ -55,7 +55,7 @@ namespace WebApi.Services
             return _context.Users.Find(id);
         }
 
-        public User Create(User user, string password)
+        public User Create(User user, string password, int groupId)
         {
             // validation
             if (string.IsNullOrWhiteSpace(password))
@@ -68,6 +68,8 @@ namespace WebApi.Services
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
+
+            user.GroupId = groupId;
 
             _context.Users.Add(user);
             _context.SaveChanges();

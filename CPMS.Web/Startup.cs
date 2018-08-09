@@ -81,6 +81,7 @@ namespace WebApi
                 });
 
             // configure DI for application services
+            services.AddScoped<IDatabaseSeederService, DatabaseSeederService>();
             services.AddScoped<IUserService, UserService>();
         }
 
@@ -115,6 +116,9 @@ namespace WebApi
 
                 var context = services.GetService<T>();
                 context.Database.Migrate();
+                
+                var seeder = services.GetService<IDatabaseSeederService>();
+                seeder.Seed();
             }
         }
     }

@@ -20,8 +20,8 @@ namespace WebApi.Controllers
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        private IUserService _userService;
-        private IMapper _mapper;
+        private readonly IUserService _userService;
+        private readonly IMapper _mapper;
         private readonly AppSettings _appSettings;
 
         public UsersController(
@@ -77,7 +77,7 @@ namespace WebApi.Controllers
             try 
             {
                 // save 
-                _userService.Create(user, userDto.Password);
+                _userService.Create(user, userDto.Password, 0);
                 return Ok();
             } 
             catch(AppException ex)

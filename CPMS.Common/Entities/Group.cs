@@ -8,7 +8,7 @@ namespace CPMS.Common.Entities
         
         public string Name { get; set; }
         
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
         public Group Parent { get; set; }
         
         public List<Group> Children { get; set; }

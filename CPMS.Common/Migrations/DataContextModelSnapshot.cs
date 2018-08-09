@@ -23,7 +23,7 @@ namespace CPMS.Common.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("ParentId");
+                    b.Property<int?>("ParentId");
 
                     b.HasKey("Id");
 
@@ -60,8 +60,7 @@ namespace CPMS.Common.Migrations
                 {
                     b.HasOne("CPMS.Common.Entities.Group", "Parent")
                         .WithMany("Children")
-                        .HasForeignKey("ParentId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ParentId");
                 });
 
             modelBuilder.Entity("CPMS.Common.Entities.User", b =>

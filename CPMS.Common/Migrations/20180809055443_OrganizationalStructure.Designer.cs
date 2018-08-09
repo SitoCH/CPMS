@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CPMS.Common.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180808221919_OrganizationalStructure")]
+    [Migration("20180809055443_OrganizationalStructure")]
     partial class OrganizationalStructure
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace CPMS.Common.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("ParentId");
+                    b.Property<int?>("ParentId");
 
                     b.HasKey("Id");
 
@@ -62,8 +62,7 @@ namespace CPMS.Common.Migrations
                 {
                     b.HasOne("CPMS.Common.Entities.Group", "Parent")
                         .WithMany("Children")
-                        .HasForeignKey("ParentId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ParentId");
                 });
 
             modelBuilder.Entity("CPMS.Common.Entities.User", b =>
