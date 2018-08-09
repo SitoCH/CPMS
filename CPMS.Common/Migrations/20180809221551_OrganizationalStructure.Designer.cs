@@ -9,14 +9,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CPMS.Common.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180809055443_OrganizationalStructure")]
+    [Migration("20180809221551_OrganizationalStructure")]
     partial class OrganizationalStructure
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.0-rtm-30799");
+                .HasAnnotation("ProductVersion", "2.1.0-rtm-30799")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("CPMS.Common.Entities.Group", b =>
                 {

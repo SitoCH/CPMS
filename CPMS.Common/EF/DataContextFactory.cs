@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.Configuration;
 
 namespace CPMS.Common.EF
 {
@@ -8,8 +8,12 @@ namespace CPMS.Common.EF
     {
         public DataContext CreateDbContext(string[] args)
         {
+            var configuration = new ConfigurationBuilder()
+                .AddUserSecrets<DataContextFactory>()
+                .Build();
+
             var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
-            optionsBuilder.UseSqlite("Data Source=cmps.db");
+            optionsBuilder.UseMySql(configuration["CPMSConnectionString"]);
             return new DataContext(optionsBuilder.Options);
         }
     }

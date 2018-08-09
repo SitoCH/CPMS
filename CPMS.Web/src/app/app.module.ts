@@ -12,7 +12,6 @@ import {JwtInterceptor, ErrorInterceptor} from './_helpers';
 import {AlertService, AuthenticationService, UserService} from './_services';
 import {HomeComponent} from './home';
 import {LoginComponent} from './login';
-import {RegisterComponent} from './register';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
@@ -28,8 +27,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
         AppComponent,
         AlertComponent,
         HomeComponent,
-        LoginComponent,
-        RegisterComponent
+        LoginComponent
     ],
     providers: [
         AuthGuard,

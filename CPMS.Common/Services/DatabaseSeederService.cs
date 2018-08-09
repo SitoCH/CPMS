@@ -2,7 +2,7 @@ using System.Linq;
 using CPMS.Common.EF;
 using CPMS.Common.Entities;
 
-namespace WebApi.Services
+namespace CPMS.Common.Services
 {
     public interface IDatabaseSeederService
     {
@@ -26,7 +26,6 @@ namespace WebApi.Services
             {
                 var group = new Group
                 {
-                    Id = 1,
                     Name = "Regione X"
                 };
 
@@ -34,10 +33,10 @@ namespace WebApi.Services
 
                 _userService.Create(new User
                 {
-                    Id = 1,
                     Username = "admin",
                     FirstName = "-",
-                    LastName = "-"
+                    LastName = "-",
+                    Group = group
                 }, "admin", 1);
             }
         }

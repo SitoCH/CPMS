@@ -1,20 +1,19 @@
 ﻿using System;
+using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using CPMS.Common.EF;
+using CPMS.Common.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
-using WebApi.Helpers;
-using WebApi.Services;
-using AutoMapper;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using CPMS.Common.EF;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
-namespace WebApi
+namespace CPMS.Web.Helpers
 {
     public class Startup
     {
@@ -100,23 +99,25 @@ namespace WebApi
 
             app.UseAuthentication();
 
+            app.UseStaticFiles();
+
             app.UseMvc();
 
-            app.EnsureMigrationOfContext<DataContext>();
+            app.EnsureMigrationOfContext();
         }
     }
 
     public static class EnsureMigration
     {
-        public static void EnsureMigrationOfContext<T>(this IApplicationBuilder app) where T : DbContext
+        public static void EnsureMigrationOfContext(this IApplicationBuilder app)
         {
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 var services = scope.ServiceProvider;
 
-                var context = services.GetService<T>();
+                var context = services.GetService<DataContext>();
                 context.Database.Migrate();
-                
+
                 var seeder = services.GetService<IDatabaseSeederService>();
                 seeder.Seed();
             }

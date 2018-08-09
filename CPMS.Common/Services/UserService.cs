@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using CPMS.Common.EF;
 using CPMS.Common.Entities;
-using WebApi.Helpers;
+using CPMS.Common.Utils;
 
-namespace WebApi.Services
+namespace CPMS.Common.Services
 {
     public interface IUserService
     {
@@ -38,11 +38,7 @@ namespace WebApi.Services
                 return null;
 
             // check if password is correct
-            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
-                return null;
-
-            // authentication successful
-            return user;
+            return VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt) ? user : null;
         }
 
         public IEnumerable<User> GetAll()
@@ -99,8 +95,7 @@ namespace WebApi.Services
             // update password if it was entered
             if (!string.IsNullOrWhiteSpace(password))
             {
-                byte[] passwordHash, passwordSalt;
-                CreatePasswordHash(password, out passwordHash, out passwordSalt);
+                CreatePasswordHash(password, out var passwordHash, out var passwordSalt);
 
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;

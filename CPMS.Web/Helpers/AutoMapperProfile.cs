@@ -1,8 +1,8 @@
 using AutoMapper;
 using CPMS.Common.Entities;
-using WebApi.Dtos;
+using CPMS.Web.Dtos;
 
-namespace WebApi.Helpers
+namespace CPMS.Web.Helpers
 {
     public class AutoMapperProfile : Profile
     {

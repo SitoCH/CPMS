@@ -1,4 +1,4 @@
-namespace WebApi.Helpers
+namespace CPMS.Web.Helpers
 {
     public class AppSettings
     {

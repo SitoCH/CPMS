@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
 using System.IdentityModel.Tokens.Jwt;
-using WebApi.Helpers;
-using Microsoft.Extensions.Options;
-using System.Text;
-using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using System.Text;
+using AutoMapper;
 using CPMS.Common.Entities;
+using CPMS.Common.Services;
+using CPMS.Common.Utils;
+using CPMS.Web.Dtos;
+using CPMS.Web.Helpers;
 using Microsoft.AspNetCore.Authorization;
-using WebApi.Services;
-using WebApi.Dtos;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
-namespace WebApi.Controllers
+namespace CPMS.Web.Controllers
 {
     [Authorize]
     [ApiController]
@@ -65,26 +66,6 @@ namespace WebApi.Controllers
                 LastName = user.LastName,
                 Token = tokenString
             });
-        }
-
-        [AllowAnonymous]
-        [HttpPost("register")]
-        public IActionResult Register([FromBody]UserDto userDto)
-        {
-            // map dto to entity
-            var user = _mapper.Map<User>(userDto);
-
-            try 
-            {
-                // save 
-                _userService.Create(user, userDto.Password, 0);
-                return Ok();
-            } 
-            catch(AppException ex)
-            {
-                // return error message if there was an exception
-                return BadRequest(new { message = ex.Message });
-            }
         }
 
         [HttpGet]

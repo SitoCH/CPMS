@@ -1,4 +1,4 @@
-namespace WebApi.Dtos
+namespace CPMS.Web.Dtos
 {
     public class UserDto
     {

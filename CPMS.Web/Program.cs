@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore;
+﻿using CPMS.Web.Helpers;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace WebApi
+namespace CPMS.Web
 {
     public class Program
     {
