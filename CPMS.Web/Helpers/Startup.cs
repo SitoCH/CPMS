@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -87,9 +88,6 @@ namespace CPMS.Web.Helpers
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(_configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
             // global cors policy
             app.UseCors(x => x
                 .AllowAnyOrigin()
@@ -99,10 +97,15 @@ namespace CPMS.Web.Helpers
 
             app.UseAuthentication();
 
-            app.UseMvc();
-            
             app.UseDefaultFiles();
             app.UseStaticFiles();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapSpaFallbackRoute(
+                    name: "spa-fallback",
+                    defaults: new { controller = "Home", action = "Index" });
+            });
 
 
             app.EnsureMigrationOfContext();
