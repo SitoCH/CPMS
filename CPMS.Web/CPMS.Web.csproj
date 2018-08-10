@@ -8,8 +8,15 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.0" />
+    <PackageReference Include="MTT" Version="0.4.7" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CPMS.Common\CPMS.Common.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\app\_models" />
+  </ItemGroup>
+  <Target Name="Convert" BeforeTargets="PrepareForBuild">
+    <ConvertMain WorkingDirectory="Dtos/" ConvertDirectory="src/app/_models/" />
+  </Target>
 </Project>

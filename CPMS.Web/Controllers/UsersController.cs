@@ -37,18 +37,18 @@ namespace CPMS.Web.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]UserDto userDto)
+        public IActionResult Authenticate([FromBody] UserDto userDto)
         {
             var user = _userService.Authenticate(userDto.Username, userDto.Password);
 
             if (user == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
+                return BadRequest(new {message = "Username or password is incorrect"});
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new Claim[] 
+                Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, user.Id.ToString())
                 }),
@@ -59,7 +59,8 @@ namespace CPMS.Web.Controllers
             var tokenString = tokenHandler.WriteToken(token);
 
             // return basic user info (without password) and token to store client side
-            return Ok(new {
+            return Ok(new
+            {
                 Id = user.Id,
                 Username = user.Username,
                 FirstName = user.FirstName,
@@ -69,38 +70,38 @@ namespace CPMS.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public ActionResult<List<UserDto>> GetAll()
         {
-            var users =  _userService.GetAll();
-            var userDtos = _mapper.Map<IList<UserDto>>(users);
-            return Ok(userDtos);
+            var users = _userService.GetAll();
+            var userDtos = _mapper.Map<List<UserDto>>(users);
+            return userDtos;
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public ActionResult<UserDto> GetById(int id)
         {
-            var user =  _userService.GetById(id);
+            var user = _userService.GetById(id);
             var userDto = _mapper.Map<UserDto>(user);
-            return Ok(userDto);
+            return userDto;
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody]UserDto userDto)
+        public IActionResult Update(int id, [FromBody] UserDto userDto)
         {
             // map dto to entity and set id
             var user = _mapper.Map<User>(userDto);
             user.Id = id;
 
-            try 
+            try
             {
                 // save 
                 _userService.Update(user, userDto.Password);
                 return Ok();
-            } 
-            catch(AppException ex)
+            }
+            catch (AppException ex)
             {
                 // return error message if there was an exception
-                return BadRequest(new { message = ex.Message });
+                return BadRequest(new {message = ex.Message});
             }
         }
 

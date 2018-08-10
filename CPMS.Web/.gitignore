@@ -47,3 +47,4 @@ obj
 dist
 wwwroot
 .vscode
+/src/app/_models/
