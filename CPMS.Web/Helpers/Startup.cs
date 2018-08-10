@@ -101,8 +101,9 @@ namespace CPMS.Web.Helpers
 
             app.UseMvc();
             
-            app.UseStaticFiles();
             app.UseDefaultFiles();
+            app.UseStaticFiles();
+
 
             app.EnsureMigrationOfContext();
         }
