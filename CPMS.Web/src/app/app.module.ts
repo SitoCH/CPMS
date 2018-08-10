@@ -3,6 +3,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 import {AppComponent} from './app.component';
 import {routing} from './app.routing';
 
@@ -13,7 +15,7 @@ import {AlertService, AuthenticationService, UserService} from './_services';
 import {HomeComponent} from './home';
 import {LoginComponent} from './login';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NavMenuComponent} from "./_directives/navmenu.component";
 
 @NgModule({
     imports: [
@@ -27,7 +29,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
         AppComponent,
         AlertComponent,
         HomeComponent,
-        LoginComponent
+        LoginComponent,
+        NavMenuComponent
     ],
     providers: [
         AuthGuard,
