@@ -99,9 +99,10 @@ namespace CPMS.Web.Helpers
 
             app.UseAuthentication();
 
-            app.UseStaticFiles();
-
             app.UseMvc();
+            
+            app.UseStaticFiles();
+            app.UseDefaultFiles();
 
             app.EnsureMigrationOfContext();
         }
