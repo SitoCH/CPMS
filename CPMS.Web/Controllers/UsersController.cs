@@ -94,7 +94,7 @@ namespace CPMS.Web.Controllers
 
             try
             {
-                // save 
+                // save
                 _userService.Update(user, userDto.Password);
                 return Ok();
             }
