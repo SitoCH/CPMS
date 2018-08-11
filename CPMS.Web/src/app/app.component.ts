@@ -20,7 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.subscription = this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
-                this.showNavBars = event.url !== '/login';
+                this.showNavBars = !event.url.startsWith('/login');
             }
         });
     }
