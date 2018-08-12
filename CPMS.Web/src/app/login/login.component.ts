@@ -17,13 +17,15 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,
-        private alertService: AlertService) {}
+        private alertService: AlertService) {
+
+        this.loginForm = this.formBuilder.group({
+            username: ['', Validators.required],
+            password: ['', Validators.required]
+        });
+    }
 
     ngOnInit() {
-        this.loginForm = this.formBuilder.group({
-            username: [''],
-            password: ['']
-        });
 
         // reset login status
         this.authenticationService.logout();

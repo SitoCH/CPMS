@@ -13,6 +13,8 @@ namespace CPMS.Common.EF
 
         public DbSet<Group> Groups { get; set; }
 
+        public DbSet<Intervention> Interventions { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

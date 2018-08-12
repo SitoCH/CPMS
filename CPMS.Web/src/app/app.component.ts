@@ -1,6 +1,7 @@
 ﻿import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from "@angular/router";
 import { Subscription } from "rxjs";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app',
@@ -14,8 +15,9 @@ export class AppComponent implements OnInit, OnDestroy {
     showNavBars: boolean;
     showSidebar: boolean = false;
 
-    constructor(private router: Router) {
-
+    constructor(private router: Router, translate: TranslateService) {
+        translate.setDefaultLang('en');
+        translate.use(translate.getBrowserLang());
     }
 
     ngOnInit() {
@@ -31,7 +33,6 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     toggleSidebar() {
-        console.log('sidebar clock!')
         this.showSidebar = !this.showSidebar;
     }
 }
