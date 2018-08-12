@@ -1,21 +1,22 @@
-﻿import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+﻿import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import {AppComponent} from './app.component';
-import {routing} from './app.routing';
+import { AppComponent } from './app.component';
+import { routing } from './app.routing';
 
-import {AlertComponent} from './_directives';
-import {AuthGuard} from './_guards';
-import {JwtInterceptor, ErrorInterceptor} from './_helpers';
-import {AlertService, AuthenticationService, UserService} from './_services';
-import {HomeComponent} from './home';
-import {LoginComponent} from './login';
+import { AlertComponent } from './_directives';
+import { AuthGuard, JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { AlertService, AuthenticationService, UserService, DashboardService } from './_services';
+import { HomeComponent } from './home';
+import { LoginComponent } from './login';
 
-import {NavMenuComponent} from "./_directives/navmenu.component";
+import { NavMenuComponent } from "./_directives/navmenu.component";
+
+import { OrganizationalStructureComponent } from './organizational-structure/organizational-structure.component';
 
 @NgModule({
     imports: [
@@ -30,15 +31,16 @@ import {NavMenuComponent} from "./_directives/navmenu.component";
         AlertComponent,
         HomeComponent,
         LoginComponent,
-        NavMenuComponent
-    ],
+        NavMenuComponent,
+        OrganizationalStructureComponent],
     providers: [
         AuthGuard,
         AlertService,
         AuthenticationService,
         UserService,
-        {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-        {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+        DashboardService,
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     ],
     bootstrap: [AppComponent]
 })

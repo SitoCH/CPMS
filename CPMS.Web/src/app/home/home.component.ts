@@ -1,31 +1,25 @@
-﻿import { Component, OnInit } from '@angular/core';
-import { first } from 'rxjs/operators';
+﻿import {Component, OnInit} from '@angular/core';
 
-import { UserService } from '../_services';
 import {UserDto} from "../_models/userDto";
+import {DashboardService} from "../_services";
+import {DashboardDto} from "../_models/dashboardDto";
 
 @Component({templateUrl: 'home.component.html'})
 export class HomeComponent implements OnInit {
     currentUser: UserDto;
-    users: UserDto[] = [];
+    dashboardDto: DashboardDto
 
-    constructor(private userService: UserService) {
+    constructor(private dashboardService: DashboardService) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
 
     ngOnInit() {
-        this.loadAllUsers();
+        this.loadDashboard();
     }
 
-    deleteUser(id: number) {
-        this.userService.delete(id).pipe(first()).subscribe(() => { 
-            this.loadAllUsers() 
-        });
-    }
-
-    private loadAllUsers() {
-        this.userService.getAll().pipe(first()).subscribe(users => { 
-            this.users = users; 
+    private loadDashboard() {
+        this.dashboardService.getDashboard().subscribe(dashboardDto => {
+            this.dashboardDto = dashboardDto;
         });
     }
 }

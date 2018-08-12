@@ -15,6 +15,7 @@ namespace CPMS.Common.Services
         User Create(User user, string password, int groupId);
         void Update(User user, string password = null);
         void Delete(int id);
+        int Count();
     }
 
     public class UserService : IUserService
@@ -113,6 +114,11 @@ namespace CPMS.Common.Services
                 _context.Users.Remove(user);
                 _context.SaveChanges();
             }
+        }
+
+        public int Count()
+        {
+            return _context.Users.Count();
         }
 
         // private helper methods
