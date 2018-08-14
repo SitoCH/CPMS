@@ -10,4 +10,5 @@ pipelines:
           - docker
           - dotnetcore
           script:
+          - apt-get install -y --no-install-recommends mono
           - ./build.sh
