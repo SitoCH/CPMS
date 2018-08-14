@@ -1,4 +1,4 @@
-image: microsoft/dotnet:2.1-sdk-alpine
+image: microsoft/dotnet:2.1-sdk
 
 options:
     docker: true
@@ -7,6 +7,7 @@ pipelines:
     default:
     - step:
           caches:
+          - docker
           - dotnetcore
           script:
           - ./build.sh
