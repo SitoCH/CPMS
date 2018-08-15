@@ -22,10 +22,12 @@ namespace CPMS.Web.Controllers
     public class DashboardController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IInterventionService _interventionService;
 
-        public DashboardController(IUserService userService)
+        public DashboardController(IUserService userService, IInterventionService interventionService)
         {
             _userService = userService;
+            _interventionService = interventionService;
         }
 
         [HttpGet]
@@ -33,7 +35,8 @@ namespace CPMS.Web.Controllers
         {
             return new DashboardDto
             {
-                Users = _userService.Count()
+                Users = _userService.Count(),
+                Interventions = _interventionService.Count()
             };
         }
     }
