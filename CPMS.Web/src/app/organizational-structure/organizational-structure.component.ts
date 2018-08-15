@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { OrganizationalStructureService } from "../_services/organizationalStructure.service";
+import { OrganizationalStructureDto } from "../_models/organizationalStructureDto";
 
 @Component({
     selector: 'app-organizational-structure',
@@ -7,10 +9,17 @@ import {Component, OnInit} from '@angular/core';
 })
 export class OrganizationalStructureComponent implements OnInit {
 
-    constructor() {
+    organizationalStructure: OrganizationalStructureDto;
+
+    constructor(private organizationalStructureService: OrganizationalStructureService) {
     }
 
     ngOnInit() {
+
+        this.organizationalStructureService.getOrganizationalStructure().subscribe(organizationalStructure => {
+            this.organizationalStructure = organizationalStructure;
+        });
+
     }
 
 }

@@ -18,8 +18,9 @@ import { NavMenuComponent } from "./_directives/navmenu.component";
 
 import { OrganizationalStructureComponent } from './organizational-structure/organizational-structure.component';
 
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { OrganizationalStructureService } from "./_services/organizationalStructure.service";
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -54,6 +55,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         AuthenticationService,
         UserService,
         DashboardService,
+        OrganizationalStructureService,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     ],

@@ -11,7 +11,7 @@ namespace CPMS.Common.Entities
         public int? ParentId { get; set; }
         public Group Parent { get; set; }
 
-        public List<Group> Children { get; set; }
+        public List<Group> Groups { get; set; }
 
         public List<User> Users { get; set; }
     }

@@ -24,7 +24,7 @@ namespace CPMS.Common.EF
 
             modelBuilder.Entity<Group>().HasData(
                 new Group { Id = 1, Name = "Regione X" },
-                new Group { Id = 2, Name = "Compagnia XX" },
+                new Group { Id = 2, Name = "Compagnia XX", ParentId = 1 },
                 new Group { Id = 3, Name = "Sezione aiuto alla condotta 1", ParentId = 2 },
                 new Group { Id = 4, Name = "Gruppo 1", ParentId = 3 },
                 new Group { Id = 5, Name = "Gruppo 2", ParentId = 3 },
