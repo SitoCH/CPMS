@@ -29,8 +29,8 @@ namespace CPMS.Web.Controllers
                 {
                     FirstName = x.FirstName,
                     LastName = x.LastName
-                }).ToList(),
-                Children = group.Children.Select(ToGroupDto).ToList()
+                }).ToArray(),
+                Children = group.Children.Select(ToGroupDto).ToArray()
             };
 
             return groupDto;
@@ -41,7 +41,7 @@ namespace CPMS.Web.Controllers
         {
             return new OrganizationalStructureDto
             {
-                Groups = _dataContext.Groups.Where(x => !x.ParentId.HasValue).ToList().Select(ToGroupDto).ToList()
+                Groups = _dataContext.Groups.Where(x => !x.ParentId.HasValue).ToList().Select(ToGroupDto).ToArray()
             };
         }
     }

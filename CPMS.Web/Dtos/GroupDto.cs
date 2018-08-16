@@ -1,13 +1,11 @@
-using System.Collections.Generic;
-
 namespace CPMS.Web.Dtos
 {
     public class GroupDto
     {
         public string Name { get; set; }
 
-        public List<GroupDto> Children { get; set; } = new List<GroupDto>();
+        public GroupDto[] Children { get; set; }
 
-        public List<MemberDto> Members { get; set; } = new List<MemberDto>();
+        public MemberDto[] Members { get; set; }
     }
 }
