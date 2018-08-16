@@ -4,6 +4,6 @@ ENV CPMSConnectionString=""
 
 EXPOSE 4000/tcp
 
-COPY /artifacts /app
+COPY /artifacts /
 
 ENTRYPOINT ["dotnet", "CPMS.Web.dll"]
