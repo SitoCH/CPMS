@@ -168,7 +168,7 @@ namespace CPMS.Common.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "FirstName", "GroupId", "LastName", "PasswordHash", "PasswordSalt", "Username" },
-                values: new object[] { 1, null, 9, null, "Gq7C1U86gJrgnRPvyCKUf0OSgCIHuIN31neYsAxa7i9gnEEQgLzGHPAoeJTKXMUq40okq/LPygYexAfowU7FOg==", "EsxGPXYl/9nxOQSqh/lnE77Wi6IvIrSa8FiqEaSa4wgxcm1V+yrWcPK/yRgoaDfZFQTpRcJ3j+dQRmeRpeI1FMz/dX1WoVrcAP2vz2/JzQZv0lzuJuMjRH4Qk7erEyOzvUsO2bp4PSfCBOa+6iXxYYHXbkC2lJVKxmCGO8fgXSs=", "admin" });
+                values: new object[] { 1, "Administrator", 9, "", "Gq7C1U86gJrgnRPvyCKUf0OSgCIHuIN31neYsAxa7i9gnEEQgLzGHPAoeJTKXMUq40okq/LPygYexAfowU7FOg==", "EsxGPXYl/9nxOQSqh/lnE77Wi6IvIrSa8FiqEaSa4wgxcm1V+yrWcPK/yRgoaDfZFQTpRcJ3j+dQRmeRpeI1FMz/dX1WoVrcAP2vz2/JzQZv0lzuJuMjRH4Qk7erEyOzvUsO2bp4PSfCBOa+6iXxYYHXbkC2lJVKxmCGO8fgXSs=", "admin" });
 
             migrationBuilder.InsertData(
                 table: "Groups",
@@ -219,7 +219,7 @@ namespace CPMS.Common.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "FirstName", "GroupId", "LastName", "PasswordHash", "PasswordSalt", "Username" },
-                values: new object[] { 4, "Nome capo gruoppo", 4, "", "Gq7C1U86gJrgnRPvyCKUf0OSgCIHuIN31neYsAxa7i9gnEEQgLzGHPAoeJTKXMUq40okq/LPygYexAfowU7FOg==", "EsxGPXYl/9nxOQSqh/lnE77Wi6IvIrSa8FiqEaSa4wgxcm1V+yrWcPK/yRgoaDfZFQTpRcJ3j+dQRmeRpeI1FMz/dX1WoVrcAP2vz2/JzQZv0lzuJuMjRH4Qk7erEyOzvUsO2bp4PSfCBOa+6iXxYYHXbkC2lJVKxmCGO8fgXSs=", "CapoGruppo-1" });
+                values: new object[] { 4, "Nome capo gruppo", 4, "", "Gq7C1U86gJrgnRPvyCKUf0OSgCIHuIN31neYsAxa7i9gnEEQgLzGHPAoeJTKXMUq40okq/LPygYexAfowU7FOg==", "EsxGPXYl/9nxOQSqh/lnE77Wi6IvIrSa8FiqEaSa4wgxcm1V+yrWcPK/yRgoaDfZFQTpRcJ3j+dQRmeRpeI1FMz/dX1WoVrcAP2vz2/JzQZv0lzuJuMjRH4Qk7erEyOzvUsO2bp4PSfCBOa+6iXxYYHXbkC2lJVKxmCGO8fgXSs=", "CapoGruppo-1" });
 
             migrationBuilder.InsertData(
                 table: "Users",

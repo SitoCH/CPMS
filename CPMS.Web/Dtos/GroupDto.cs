@@ -6,7 +6,7 @@ namespace CPMS.Web.Dtos
     {
         public string Name { get; set; }
 
-        public List<GroupDto> Groups { get; set; } = new List<GroupDto>();
+        public List<GroupDto> Children { get; set; } = new List<GroupDto>();
 
         public List<MemberDto> Members { get; set; } = new List<MemberDto>();
     }

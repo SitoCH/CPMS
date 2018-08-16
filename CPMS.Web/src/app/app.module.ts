@@ -20,8 +20,8 @@ import { OrganizationalStructureComponent } from './organizational-structure/org
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { OrganizationalStructureService } from "./_services/organizationalStructure.service";
-
+import { OrganizationalStructureService } from "./_services/organizationalStructure.service";;
+import { GroupStructureComponent } from './organizational-structure/group-structure/group-structure.component'
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, "/assets/i18n/", ".json");
@@ -48,7 +48,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         HomeComponent,
         LoginComponent,
         NavMenuComponent,
-        OrganizationalStructureComponent],
+        OrganizationalStructureComponent,
+        GroupStructureComponent],
     providers: [
         AuthGuard,
         AlertService,

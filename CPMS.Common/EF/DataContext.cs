@@ -62,6 +62,8 @@ namespace CPMS.Common.EF
                 {
                     Id = 1,
                     Username = "admin",
+                    FirstName = "Administrator",
+                    LastName = "",
                     PasswordHash = passwordHash,
                     PasswordSalt = passwordSalt,
                     GroupId = 9
@@ -88,7 +90,7 @@ namespace CPMS.Common.EF
                 {
                     Id = 4,
                     Username = "CapoGruppo-1",
-                    FirstName = "Nome capo gruoppo",
+                    FirstName = "Nome capo gruppo",
                     LastName = "",
                     PasswordHash = passwordHash,
                     PasswordSalt = passwordSalt,

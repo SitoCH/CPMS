@@ -30,7 +30,7 @@ namespace CPMS.Web.Controllers
                     FirstName = x.FirstName,
                     LastName = x.LastName
                 }).ToList(),
-                Groups = group.Children.Select(ToGroupDto).ToList()
+                Children = group.Children.Select(ToGroupDto).ToList()
             };
 
             return groupDto;
