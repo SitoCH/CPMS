@@ -1,5 +1,6 @@
 #addin "Cake.Npm"
 #addin "Cake.Docker"
+#tool nuget:?package=NUnit.ConsoleRunner&version=3.4.0
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -31,15 +32,15 @@ Task("Clean")
     CleanDirectory(artifactsPath);
 });
 
-Task("RestoreNuGetPackages")
+Task("DotNetCoreRestore")
 .IsDependentOn("Clean")
 .Does(() =>
 {
     DotNetCoreRestore(solutionPath);
 });
 
-Task("DotNetBuild")
-.IsDependentOn("RestoreNuGetPackages")
+Task("DotNetCoreBuild")
+.IsDependentOn("DotNetCoreRestore")
 .Does(() =>
 {
     var buildSettings = new DotNetCoreBuildSettings {
@@ -49,6 +50,20 @@ Task("DotNetBuild")
     };
 
     DotNetCoreBuild(solutionPath, buildSettings);
+});
+
+Task("DotNetCoreTest")
+.IsDependentOn("DotNetCoreBuild")
+.Does(() =>
+{
+    var testSettings = new DotNetCoreTestSettings {
+        Configuration = configuration,
+        NoRestore = true,
+        NoBuild = true,
+        Logger = "trx;LogFileName=TestResults.trx",
+    };
+
+    DotNetCoreTest("CPMS.Tests/CPMS.Tests.csproj", testSettings);
 });
 
 Task("NpmInstall")
@@ -76,8 +91,8 @@ Task("NpmBuild")
         NpmRunScript(settings);
 });
 
-Task("DotNetPublish")
-.IsDependentOn("DotNetBuild")
+Task("DotNetCorePublish")
+.IsDependentOn("DotNetCoreTest")
 .IsDependentOn("NpmBuild")
 .Does(() =>
 {
@@ -92,7 +107,7 @@ Task("DotNetPublish")
 });
 
 Task("DockerBuild")
-.IsDependentOn("DotNetPublish")
+.IsDependentOn("DotNetCorePublish")
 .Does(() => {
      var settings = new DockerImageBuildSettings
      {
@@ -104,6 +119,7 @@ Task("DockerBuild")
 
 Task("DockerLogin")
 .IsDependentOn("DockerBuild")
+.WithCriteria(TFBuild.IsRunningOnVSTS)
 .Does(() => {
     var dockerUsername = EnvironmentVariable("DOCKER_USERNAME");
     var dockerPassword = EnvironmentVariable("DOCKER_PASSWORD");
@@ -115,6 +131,7 @@ Task("DockerLogin")
 
 Task("DockerPush")
 .IsDependentOn("DockerLogin")
+.WithCriteria(TFBuild.IsRunningOnVSTS)
 .Does(() => {
     DockerPush("sito/cpms");
 });

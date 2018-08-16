@@ -10,11 +10,11 @@ namespace CPMS.Common.Entities
 
         public string Username { get; set; }
 
-        public byte[] PasswordHash { get; set; }
+        public string PasswordHash { get; set; }
 
-        public byte[] PasswordSalt { get; set; }
+        public string PasswordSalt { get; set; }
 
         public int GroupId { get; set; }
-        public Group Group { get; set; }
+        public virtual Group Group { get; set; }
     }
 }

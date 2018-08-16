@@ -4,10 +4,30 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CPMS.Common.Migrations
 {
-    public partial class Journal : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Groups",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    ParentId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Groups", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Groups_Groups_ParentId",
+                        column: x => x.ParentId,
+                        principalTable: "Groups",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Interventions",
                 columns: table => new
@@ -33,6 +53,30 @@ namespace CPMS.Common.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_JournalEntryChannel", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Username = table.Column<string>(nullable: true),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    PasswordSalt = table.Column<string>(nullable: true),
+                    GroupId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_Groups_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "Groups",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -124,7 +168,7 @@ namespace CPMS.Common.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "FirstName", "GroupId", "LastName", "PasswordHash", "PasswordSalt", "Username" },
-                values: new object[] { 1, null, 9, null, new byte[] { 26, 174, 194, 213, 79, 58, 128, 154, 224, 157, 19, 239, 200, 34, 148, 127, 67, 146, 128, 34, 7, 184, 131, 119, 214, 119, 152, 176, 12, 90, 238, 47, 96, 156, 65, 16, 128, 188, 198, 28, 240, 40, 120, 148, 202, 92, 197, 42, 227, 74, 36, 171, 242, 207, 202, 6, 30, 196, 7, 232, 193, 78, 197, 58 }, new byte[] { 18, 204, 70, 61, 118, 37, 255, 217, 241, 57, 4, 170, 135, 249, 103, 19, 190, 214, 139, 162, 47, 34, 180, 154, 240, 88, 170, 17, 164, 154, 227, 8, 49, 114, 109, 85, 251, 42, 214, 112, 242, 191, 201, 24, 40, 104, 55, 217, 21, 4, 233, 69, 194, 119, 143, 231, 80, 70, 103, 145, 165, 226, 53, 20, 204, 255, 117, 125, 86, 161, 90, 220, 0, 253, 175, 207, 111, 201, 205, 6, 111, 210, 92, 238, 38, 227, 35, 68, 126, 16, 147, 183, 171, 19, 35, 179, 189, 75, 14, 217, 186, 120, 61, 39, 194, 4, 230, 190, 234, 37, 241, 97, 129, 215, 110, 64, 182, 148, 149, 74, 198, 96, 134, 59, 199, 224, 93, 43 }, "admin" });
+                values: new object[] { 1, null, 9, null, "Gq7C1U86gJrgnRPvyCKUf0OSgCIHuIN31neYsAxa7i9gnEEQgLzGHPAoeJTKXMUq40okq/LPygYexAfowU7FOg==", "EsxGPXYl/9nxOQSqh/lnE77Wi6IvIrSa8FiqEaSa4wgxcm1V+yrWcPK/yRgoaDfZFQTpRcJ3j+dQRmeRpeI1FMz/dX1WoVrcAP2vz2/JzQZv0lzuJuMjRH4Qk7erEyOzvUsO2bp4PSfCBOa+6iXxYYHXbkC2lJVKxmCGO8fgXSs=", "admin" });
 
             migrationBuilder.InsertData(
                 table: "Groups",
@@ -154,7 +198,7 @@ namespace CPMS.Common.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "FirstName", "GroupId", "LastName", "PasswordHash", "PasswordSalt", "Username" },
-                values: new object[] { 2, "Nome comandante di compagnia", 2, "", new byte[] { 26, 174, 194, 213, 79, 58, 128, 154, 224, 157, 19, 239, 200, 34, 148, 127, 67, 146, 128, 34, 7, 184, 131, 119, 214, 119, 152, 176, 12, 90, 238, 47, 96, 156, 65, 16, 128, 188, 198, 28, 240, 40, 120, 148, 202, 92, 197, 42, 227, 74, 36, 171, 242, 207, 202, 6, 30, 196, 7, 232, 193, 78, 197, 58 }, new byte[] { 18, 204, 70, 61, 118, 37, 255, 217, 241, 57, 4, 170, 135, 249, 103, 19, 190, 214, 139, 162, 47, 34, 180, 154, 240, 88, 170, 17, 164, 154, 227, 8, 49, 114, 109, 85, 251, 42, 214, 112, 242, 191, 201, 24, 40, 104, 55, 217, 21, 4, 233, 69, 194, 119, 143, 231, 80, 70, 103, 145, 165, 226, 53, 20, 204, 255, 117, 125, 86, 161, 90, 220, 0, 253, 175, 207, 111, 201, 205, 6, 111, 210, 92, 238, 38, 227, 35, 68, 126, 16, 147, 183, 171, 19, 35, 179, 189, 75, 14, 217, 186, 120, 61, 39, 194, 4, 230, 190, 234, 37, 241, 97, 129, 215, 110, 64, 182, 148, 149, 74, 198, 96, 134, 59, 199, 224, 93, 43 }, "ComandanteDiCompagnia-1" });
+                values: new object[] { 2, "Nome comandante di compagnia", 2, "", "Gq7C1U86gJrgnRPvyCKUf0OSgCIHuIN31neYsAxa7i9gnEEQgLzGHPAoeJTKXMUq40okq/LPygYexAfowU7FOg==", "EsxGPXYl/9nxOQSqh/lnE77Wi6IvIrSa8FiqEaSa4wgxcm1V+yrWcPK/yRgoaDfZFQTpRcJ3j+dQRmeRpeI1FMz/dX1WoVrcAP2vz2/JzQZv0lzuJuMjRH4Qk7erEyOzvUsO2bp4PSfCBOa+6iXxYYHXbkC2lJVKxmCGO8fgXSs=", "ComandanteDiCompagnia-1" });
 
             migrationBuilder.InsertData(
                 table: "Groups",
@@ -170,22 +214,27 @@ namespace CPMS.Common.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "FirstName", "GroupId", "LastName", "PasswordHash", "PasswordSalt", "Username" },
-                values: new object[] { 3, "Nome capo sezione", 3, "", new byte[] { 26, 174, 194, 213, 79, 58, 128, 154, 224, 157, 19, 239, 200, 34, 148, 127, 67, 146, 128, 34, 7, 184, 131, 119, 214, 119, 152, 176, 12, 90, 238, 47, 96, 156, 65, 16, 128, 188, 198, 28, 240, 40, 120, 148, 202, 92, 197, 42, 227, 74, 36, 171, 242, 207, 202, 6, 30, 196, 7, 232, 193, 78, 197, 58 }, new byte[] { 18, 204, 70, 61, 118, 37, 255, 217, 241, 57, 4, 170, 135, 249, 103, 19, 190, 214, 139, 162, 47, 34, 180, 154, 240, 88, 170, 17, 164, 154, 227, 8, 49, 114, 109, 85, 251, 42, 214, 112, 242, 191, 201, 24, 40, 104, 55, 217, 21, 4, 233, 69, 194, 119, 143, 231, 80, 70, 103, 145, 165, 226, 53, 20, 204, 255, 117, 125, 86, 161, 90, 220, 0, 253, 175, 207, 111, 201, 205, 6, 111, 210, 92, 238, 38, 227, 35, 68, 126, 16, 147, 183, 171, 19, 35, 179, 189, 75, 14, 217, 186, 120, 61, 39, 194, 4, 230, 190, 234, 37, 241, 97, 129, 215, 110, 64, 182, 148, 149, 74, 198, 96, 134, 59, 199, 224, 93, 43 }, "CapoSezione-1" });
+                values: new object[] { 3, "Nome capo sezione", 3, "", "Gq7C1U86gJrgnRPvyCKUf0OSgCIHuIN31neYsAxa7i9gnEEQgLzGHPAoeJTKXMUq40okq/LPygYexAfowU7FOg==", "EsxGPXYl/9nxOQSqh/lnE77Wi6IvIrSa8FiqEaSa4wgxcm1V+yrWcPK/yRgoaDfZFQTpRcJ3j+dQRmeRpeI1FMz/dX1WoVrcAP2vz2/JzQZv0lzuJuMjRH4Qk7erEyOzvUsO2bp4PSfCBOa+6iXxYYHXbkC2lJVKxmCGO8fgXSs=", "CapoSezione-1" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "FirstName", "GroupId", "LastName", "PasswordHash", "PasswordSalt", "Username" },
-                values: new object[] { 4, "Nome capo gruoppo", 4, "", new byte[] { 26, 174, 194, 213, 79, 58, 128, 154, 224, 157, 19, 239, 200, 34, 148, 127, 67, 146, 128, 34, 7, 184, 131, 119, 214, 119, 152, 176, 12, 90, 238, 47, 96, 156, 65, 16, 128, 188, 198, 28, 240, 40, 120, 148, 202, 92, 197, 42, 227, 74, 36, 171, 242, 207, 202, 6, 30, 196, 7, 232, 193, 78, 197, 58 }, new byte[] { 18, 204, 70, 61, 118, 37, 255, 217, 241, 57, 4, 170, 135, 249, 103, 19, 190, 214, 139, 162, 47, 34, 180, 154, 240, 88, 170, 17, 164, 154, 227, 8, 49, 114, 109, 85, 251, 42, 214, 112, 242, 191, 201, 24, 40, 104, 55, 217, 21, 4, 233, 69, 194, 119, 143, 231, 80, 70, 103, 145, 165, 226, 53, 20, 204, 255, 117, 125, 86, 161, 90, 220, 0, 253, 175, 207, 111, 201, 205, 6, 111, 210, 92, 238, 38, 227, 35, 68, 126, 16, 147, 183, 171, 19, 35, 179, 189, 75, 14, 217, 186, 120, 61, 39, 194, 4, 230, 190, 234, 37, 241, 97, 129, 215, 110, 64, 182, 148, 149, 74, 198, 96, 134, 59, 199, 224, 93, 43 }, "CapoGruppo-1" });
+                values: new object[] { 4, "Nome capo gruoppo", 4, "", "Gq7C1U86gJrgnRPvyCKUf0OSgCIHuIN31neYsAxa7i9gnEEQgLzGHPAoeJTKXMUq40okq/LPygYexAfowU7FOg==", "EsxGPXYl/9nxOQSqh/lnE77Wi6IvIrSa8FiqEaSa4wgxcm1V+yrWcPK/yRgoaDfZFQTpRcJ3j+dQRmeRpeI1FMz/dX1WoVrcAP2vz2/JzQZv0lzuJuMjRH4Qk7erEyOzvUsO2bp4PSfCBOa+6iXxYYHXbkC2lJVKxmCGO8fgXSs=", "CapoGruppo-1" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "FirstName", "GroupId", "LastName", "PasswordHash", "PasswordSalt", "Username" },
-                values: new object[] { 5, "Nome milite 1", 4, "", new byte[] { 26, 174, 194, 213, 79, 58, 128, 154, 224, 157, 19, 239, 200, 34, 148, 127, 67, 146, 128, 34, 7, 184, 131, 119, 214, 119, 152, 176, 12, 90, 238, 47, 96, 156, 65, 16, 128, 188, 198, 28, 240, 40, 120, 148, 202, 92, 197, 42, 227, 74, 36, 171, 242, 207, 202, 6, 30, 196, 7, 232, 193, 78, 197, 58 }, new byte[] { 18, 204, 70, 61, 118, 37, 255, 217, 241, 57, 4, 170, 135, 249, 103, 19, 190, 214, 139, 162, 47, 34, 180, 154, 240, 88, 170, 17, 164, 154, 227, 8, 49, 114, 109, 85, 251, 42, 214, 112, 242, 191, 201, 24, 40, 104, 55, 217, 21, 4, 233, 69, 194, 119, 143, 231, 80, 70, 103, 145, 165, 226, 53, 20, 204, 255, 117, 125, 86, 161, 90, 220, 0, 253, 175, 207, 111, 201, 205, 6, 111, 210, 92, 238, 38, 227, 35, 68, 126, 16, 147, 183, 171, 19, 35, 179, 189, 75, 14, 217, 186, 120, 61, 39, 194, 4, 230, 190, 234, 37, 241, 97, 129, 215, 110, 64, 182, 148, 149, 74, 198, 96, 134, 59, 199, 224, 93, 43 }, "Milite-1" });
+                values: new object[] { 5, "Nome milite 1", 4, "", "Gq7C1U86gJrgnRPvyCKUf0OSgCIHuIN31neYsAxa7i9gnEEQgLzGHPAoeJTKXMUq40okq/LPygYexAfowU7FOg==", "EsxGPXYl/9nxOQSqh/lnE77Wi6IvIrSa8FiqEaSa4wgxcm1V+yrWcPK/yRgoaDfZFQTpRcJ3j+dQRmeRpeI1FMz/dX1WoVrcAP2vz2/JzQZv0lzuJuMjRH4Qk7erEyOzvUsO2bp4PSfCBOa+6iXxYYHXbkC2lJVKxmCGO8fgXSs=", "Milite-1" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "FirstName", "GroupId", "LastName", "PasswordHash", "PasswordSalt", "Username" },
-                values: new object[] { 6, "Nome milite 2", 4, "", new byte[] { 26, 174, 194, 213, 79, 58, 128, 154, 224, 157, 19, 239, 200, 34, 148, 127, 67, 146, 128, 34, 7, 184, 131, 119, 214, 119, 152, 176, 12, 90, 238, 47, 96, 156, 65, 16, 128, 188, 198, 28, 240, 40, 120, 148, 202, 92, 197, 42, 227, 74, 36, 171, 242, 207, 202, 6, 30, 196, 7, 232, 193, 78, 197, 58 }, new byte[] { 18, 204, 70, 61, 118, 37, 255, 217, 241, 57, 4, 170, 135, 249, 103, 19, 190, 214, 139, 162, 47, 34, 180, 154, 240, 88, 170, 17, 164, 154, 227, 8, 49, 114, 109, 85, 251, 42, 214, 112, 242, 191, 201, 24, 40, 104, 55, 217, 21, 4, 233, 69, 194, 119, 143, 231, 80, 70, 103, 145, 165, 226, 53, 20, 204, 255, 117, 125, 86, 161, 90, 220, 0, 253, 175, 207, 111, 201, 205, 6, 111, 210, 92, 238, 38, 227, 35, 68, 126, 16, 147, 183, 171, 19, 35, 179, 189, 75, 14, 217, 186, 120, 61, 39, 194, 4, 230, 190, 234, 37, 241, 97, 129, 215, 110, 64, 182, 148, 149, 74, 198, 96, 134, 59, 199, 224, 93, 43 }, "Milite-2" });
+                values: new object[] { 6, "Nome milite 2", 4, "", "Gq7C1U86gJrgnRPvyCKUf0OSgCIHuIN31neYsAxa7i9gnEEQgLzGHPAoeJTKXMUq40okq/LPygYexAfowU7FOg==", "EsxGPXYl/9nxOQSqh/lnE77Wi6IvIrSa8FiqEaSa4wgxcm1V+yrWcPK/yRgoaDfZFQTpRcJ3j+dQRmeRpeI1FMz/dX1WoVrcAP2vz2/JzQZv0lzuJuMjRH4Qk7erEyOzvUsO2bp4PSfCBOa+6iXxYYHXbkC2lJVKxmCGO8fgXSs=", "Milite-2" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Groups_ParentId",
+                table: "Groups",
+                column: "ParentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Journal_InterventionId",
@@ -201,6 +250,11 @@ namespace CPMS.Common.Migrations
                 name: "IX_JournalEntry_JournalId",
                 table: "JournalEntry",
                 column: "JournalId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_GroupId",
+                table: "Users",
+                column: "GroupId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -209,88 +263,19 @@ namespace CPMS.Common.Migrations
                 name: "JournalEntry");
 
             migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
                 name: "JournalEntryChannel");
 
             migrationBuilder.DropTable(
                 name: "Journal");
 
             migrationBuilder.DropTable(
+                name: "Groups");
+
+            migrationBuilder.DropTable(
                 name: "Interventions");
-
-            migrationBuilder.DeleteData(
-                table: "Groups",
-                keyColumn: "Id",
-                keyValue: 5);
-
-            migrationBuilder.DeleteData(
-                table: "Groups",
-                keyColumn: "Id",
-                keyValue: 7);
-
-            migrationBuilder.DeleteData(
-                table: "Groups",
-                keyColumn: "Id",
-                keyValue: 8);
-
-            migrationBuilder.DeleteData(
-                table: "Users",
-                keyColumn: "Id",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Users",
-                keyColumn: "Id",
-                keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "Users",
-                keyColumn: "Id",
-                keyValue: 3);
-
-            migrationBuilder.DeleteData(
-                table: "Users",
-                keyColumn: "Id",
-                keyValue: 4);
-
-            migrationBuilder.DeleteData(
-                table: "Users",
-                keyColumn: "Id",
-                keyValue: 5);
-
-            migrationBuilder.DeleteData(
-                table: "Users",
-                keyColumn: "Id",
-                keyValue: 6);
-
-            migrationBuilder.DeleteData(
-                table: "Groups",
-                keyColumn: "Id",
-                keyValue: 4);
-
-            migrationBuilder.DeleteData(
-                table: "Groups",
-                keyColumn: "Id",
-                keyValue: 6);
-
-            migrationBuilder.DeleteData(
-                table: "Groups",
-                keyColumn: "Id",
-                keyValue: 9);
-
-            migrationBuilder.DeleteData(
-                table: "Groups",
-                keyColumn: "Id",
-                keyValue: 3);
-
-            migrationBuilder.DeleteData(
-                table: "Groups",
-                keyColumn: "Id",
-                keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "Groups",
-                keyColumn: "Id",
-                keyValue: 1);
         }
     }
 }

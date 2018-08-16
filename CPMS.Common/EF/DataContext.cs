@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using CPMS.Common.Entities;
 using CPMS.Common.Utils;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,12 @@ namespace CPMS.Common.EF
 
         public DbSet<Intervention> Interventions { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseLazyLoadingProxies();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -34,7 +41,22 @@ namespace CPMS.Common.EF
                 new Group { Id = 9, Name = "Ospiti" });
 
 
-            PasswordUtils.CreatePasswordHash("admin", out var passwordHash, out var passwordSalt);
+            var passwordHash = Convert.ToBase64String(new byte[]
+            {
+                26, 174, 194, 213, 79, 58, 128, 154, 224, 157, 19, 239, 200, 34, 148, 127, 67, 146, 128, 34, 7, 184, 131, 119, 214, 119, 152, 176, 12, 90,
+                238, 47, 96, 156, 65, 16, 128, 188, 198, 28, 240, 40, 120, 148, 202, 92, 197, 42, 227, 74, 36, 171, 242, 207, 202, 6, 30, 196, 7, 232, 193,
+                78, 197, 58
+            });
+
+            var passwordSalt = Convert.ToBase64String(new byte[]
+            {
+                18, 204, 70, 61, 118, 37, 255, 217, 241, 57, 4, 170, 135, 249, 103, 19, 190, 214, 139, 162, 47, 34, 180, 154, 240, 88, 170, 17, 164, 154,
+                227, 8, 49, 114, 109, 85, 251, 42, 214, 112, 242, 191, 201, 24, 40, 104, 55, 217, 21, 4, 233, 69, 194, 119, 143, 231, 80, 70, 103, 145, 165,
+                226, 53, 20, 204, 255, 117, 125, 86, 161, 90, 220, 0, 253, 175, 207, 111, 201, 205, 6, 111, 210, 92, 238, 38, 227, 35, 68, 126, 16, 147, 183,
+                171, 19, 35, 179, 189, 75, 14, 217, 186, 120, 61, 39, 194, 4, 230, 190, 234, 37, 241, 97, 129, 215, 110, 64, 182, 148, 149, 74, 198, 96,
+                134, 59, 199, 224, 93, 43
+            });
+
             modelBuilder.Entity<User>().HasData(
                 new User
                 {

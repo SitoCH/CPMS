@@ -7,6 +7,6 @@ namespace CPMS.Common.Entities
         public string Name { get; set; }
 
         public int InterventionId { get; set; }
-        public Intervention Intervention { get; set; }
+        public virtual Intervention Intervention { get; set; }
     }
 }

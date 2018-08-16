@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CPMS.Common.Entities
 {
@@ -9,10 +10,11 @@ namespace CPMS.Common.Entities
         public string Name { get; set; }
 
         public int? ParentId { get; set; }
-        public Group Parent { get; set; }
+        public virtual Group Parent { get; set; }
 
-        public List<Group> Groups { get; set; }
+        [InverseProperty("Parent")]
+        public virtual ICollection<Group> Children { get; set; }
 
-        public List<User> Users { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

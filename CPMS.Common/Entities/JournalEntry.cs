@@ -11,9 +11,9 @@ namespace CPMS.Common.Entities
         public string Text { get; set; }
 
         public int JournalId { get; set; }
-        public Journal Journal { get; set; }
+        public virtual Journal Journal { get; set; }
 
         public int JournalEntryChannelId { get; set; }
-        public JournalEntryChannel JournalEntryChannel { get; set; }
+        public virtual JournalEntryChannel JournalEntryChannel { get; set; }
     }
 }
