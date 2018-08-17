@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GroupDto } from "../../_models/groupDto";
+import { GroupDto } from "../_models/groupDto";
 
 @Component({
     selector: 'group-structure',

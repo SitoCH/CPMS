@@ -1,6 +1,6 @@
 <div style="padding-left: 10px">
     <span [style.font-size.rem]="2.25 - level * 0.25">{{group.name}}</span>
-    <div *ngIf="group.members.length > 0" style="padding-left: 10px">
+    <div *ngIf="group.members.length > 0" style="padding-left: 10px" class="border-bottom">
         <span>{{'Members' | translate}}:</span>
         <ul>
             <li *ngFor="let member of group.members">{{member.firstName}} {{member.lastName}}</li>

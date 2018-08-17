@@ -7,9 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CPMS.Web.Controllers
 {
-    [Authorize]
-    [ApiController]
-    [Route("[controller]")]
+    [Authorize, ApiController, Route("[controller]")]
     public class OrganizationalStructureController : ControllerBase
     {
         private readonly DataContext _dataContext;
@@ -20,7 +18,7 @@ namespace CPMS.Web.Controllers
         }
 
 
-        private GroupDto ToGroupDto(Group group)
+        private static GroupDto ToGroupDto(Group group)
         {
             var groupDto = new GroupDto
             {

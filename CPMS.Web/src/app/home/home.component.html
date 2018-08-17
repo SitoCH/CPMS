@@ -23,6 +23,11 @@
         -ms-transform: rotate(-44deg);
         transform: rotate(-44deg);
     }
+
+    a {
+        text-decoration: none;
+        color: white;
+    }
 </style>
 
 
@@ -39,24 +44,28 @@
 <div class="row mb-3">
     <div class="col-xl-3 col-sm-6 py-2">
         <div class="card bg-success text-white h-100">
-            <div class="card-body bg-success">
-                <div class="rotate">
-                    <i class="fa fa-user fa-4x"></i>
+            <a [routerLink]="['organizational-structure']">
+                <div class="card-body bg-success">
+                    <div class="rotate">
+                        <i class="fa fa-user fa-4x"></i>
+                    </div>
+                    <h6 class="text-uppercase">{{'Users' | translate}}</h6>
+                    <h1 class="display-4">{{dashboardDto.users}}</h1>
                 </div>
-                <h6 class="text-uppercase">{{'Users' | translate}}</h6>
-                <h1 class="display-4">{{dashboardDto.users}}</h1>
-            </div>
+            </a>
         </div>
     </div>
     <div class="col-xl-3 col-sm-6 py-2">
         <div class="card text-white bg-danger h-100">
-            <div class="card-body bg-danger">
-                <div class="rotate">
-                    <i class="fa fa-exclamation-triangle fa-4x"></i>
+            <a [routerLink]="['interventions']">
+                <div class="card-body bg-danger">
+                    <div class="rotate">
+                        <i class="fa fa-exclamation-triangle fa-4x"></i>
+                    </div>
+                    <h6 class="text-uppercase">{{'Interventions' | translate}}</h6>
+                    <h1 class="display-4">{{dashboardDto.interventions}}</h1>
                 </div>
-                <h6 class="text-uppercase">{{'Interventions' | translate}}</h6>
-                <h1 class="display-4">{{dashboardDto.interventions}}</h1>
-            </div>
+            </a>
         </div>
     </div>
     <div class="col-xl-3 col-sm-6 py-2">

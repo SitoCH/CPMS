@@ -8,8 +8,8 @@ namespace CPMS.Web.Helpers
     {
         public AutoMapperProfile()
         {
-            CreateMap<User, UserDto>();
-            CreateMap<UserDto, User>();
+            CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<Intervention, InterventionDto>().ReverseMap();
         }
     }
 }

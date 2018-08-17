@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -12,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace CPMS.Web.Helpers
 {
@@ -35,7 +38,9 @@ namespace CPMS.Web.Helpers
             services.AddDbContext<DataContext>(x => x.UseMySql(connectionString));
 
             services.AddCors();
+
             services.AddMvc();
+
             services.AddAutoMapper();
 
             // configure strongly typed settings objects
@@ -45,6 +50,22 @@ namespace CPMS.Web.Helpers
             // configure jwt authentication
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+
+            services.AddSwaggerGen(config =>
+            {
+                config.SwaggerDoc("v1", new Info { Title = "CPMS", Version = "v1" });
+                config.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme.",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+                config.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>> {
+                    { "Bearer", Enumerable.Empty<string>() },
+                });
+            });
+
             services.AddAuthentication(x =>
                 {
                     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -99,13 +120,19 @@ namespace CPMS.Web.Helpers
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1"); });
+
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
-
 
             app.EnsureMigrationOfContext();
         }

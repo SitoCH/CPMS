@@ -1,0 +1,33 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1>{{'Interventions' | translate}}</h1>
+    <!--<div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <button class="btn btn-sm btn-outline-secondary">Share</button>
+            <button class="btn btn-sm btn-outline-secondary">Export</button>
+        </div>
+    </div>-->
+</div>
+
+<div>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th width="50px">Id</th>
+            <th>{{'Name' | translate}}</th>
+            <th width="40px"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of interventions">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td><a [routerLink]="['/intervention', item.id]" class="btn btn-outline-dark">
+                <i class="fa fa-search"></i>
+            </a>
+        </tr>
+        <tr *ngIf="!interventions">
+            <td colspan="3"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

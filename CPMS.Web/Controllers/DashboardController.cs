@@ -5,9 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CPMS.Web.Controllers
 {
-    [Authorize]
-    [ApiController]
-    [Route("[controller]")]
+    [Authorize, ApiController, Route("[controller]")]
     public class DashboardController : ControllerBase
     {
         private readonly IUserService _userService;

@@ -20,8 +20,13 @@ import { OrganizationalStructureComponent } from './organizational-structure/org
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { OrganizationalStructureService } from "./_services/organizationalStructure.service";;
-import { GroupStructureComponent } from './organizational-structure/group-structure/group-structure.component'
+import { OrganizationalStructureService } from "./_services/organizationalStructure.service";
+import { GroupStructureComponent } from './organizational-structure/group-structure.component';
+import { InterventionsComponent } from './interventions/interventions.component'
+    ;
+import { SidebarComponent } from './_directives/sidebar.component'
+import { InterventionService } from "./_services/intervention.service";;
+import { InterventionDetailComponent } from './interventions/intervention-detail.component'
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, "/assets/i18n/", ".json");
@@ -49,13 +54,17 @@ export function HttpLoaderFactory(http: HttpClient) {
         LoginComponent,
         NavMenuComponent,
         OrganizationalStructureComponent,
-        GroupStructureComponent],
+        GroupStructureComponent,
+        InterventionsComponent,
+        SidebarComponent,
+        InterventionDetailComponent],
     providers: [
         AuthGuard,
         AlertService,
         AuthenticationService,
         UserService,
         DashboardService,
+        InterventionService,
         OrganizationalStructureService,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

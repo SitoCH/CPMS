@@ -16,9 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace CPMS.Web.Controllers
 {
-    [Authorize]
-    [ApiController]
-    [Route("[controller]")]
+    [Authorize, ApiController, Route("[controller]")]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
