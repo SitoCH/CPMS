@@ -21,16 +21,16 @@ namespace CPMS.Web.Controllers
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
-        private readonly AppSettings _appSettings;
+        private readonly IConfigurationService _configurationService;
 
         public UsersController(
             IUserService userService,
             IMapper mapper,
-            IOptions<AppSettings> appSettings)
+            IConfigurationService configurationService)
         {
             _userService = userService;
             _mapper = mapper;
-            _appSettings = appSettings.Value;
+            _configurationService = configurationService;
         }
 
         [AllowAnonymous]
@@ -40,13 +40,13 @@ namespace CPMS.Web.Controllers
             var user = _userService.Authenticate(userDto.Username, userDto.Password);
 
             if (user == null)
-                return BadRequest(new {message = "Username or password is incorrect"});
+                return BadRequest(new { message = "Username or password is incorrect" });
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var key = Encoding.UTF8.GetBytes(_configurationService.GetValue(ConfigurationKeys.JwtSecret));
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new Claim[]
+                Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, user.Id.ToString())
                 }),
@@ -99,7 +99,7 @@ namespace CPMS.Web.Controllers
             catch (AppException ex)
             {
                 // return error message if there was an exception
-                return BadRequest(new {message = ex.Message});
+                return BadRequest(new { message = ex.Message });
             }
         }
 

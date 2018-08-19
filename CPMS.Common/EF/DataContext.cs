@@ -14,6 +14,8 @@ namespace CPMS.Common.EF
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<Configuration> Configurations { get; set; }
+
         public DbSet<Group> Groups { get; set; }
 
         public DbSet<Intervention> Interventions { get; set; }
