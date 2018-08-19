@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using AutoMapper;
+using CPMS.Common.Entities;
 using CPMS.Common.Services;
 using CPMS.Web.Dtos;
 using Microsoft.AspNetCore.Authorization;
@@ -22,7 +23,7 @@ namespace CPMS.Web.Controllers
         [HttpGet]
         public ActionResult<List<InterventionDto>> GetInterventions()
         {
-            return _mapper.Map<List<InterventionDto>>(_interventionService.GetInterventions());
+            return _mapper.Map<List<InterventionDto>>(_interventionService.GetAll());
         }
 
         [HttpGet("{id}")]
@@ -30,8 +31,15 @@ namespace CPMS.Web.Controllers
         {
             return new InterventionDetailDto
             {
-                Intervention = _mapper.Map<InterventionDto>(_interventionService.GetIntervention(id))
+                Intervention = _mapper.Map<InterventionDto>(_interventionService.Get(id))
             };
+        }
+
+        [HttpPut]
+        public void AddIntervention(InterventionDto interventionDto)
+        {
+            var newIntervention = _mapper.Map<Intervention>(interventionDto);
+            _interventionService.Add(newIntervention);
         }
     }
 }

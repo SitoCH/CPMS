@@ -21,7 +21,7 @@ export class InterventionDetailComponent implements OnInit {
 
         this.route.paramMap.pipe(
             switchMap((params: ParamMap) =>
-                this.interventionService.getIntervention(params.get('id')))).subscribe(intervention => {
+                this.interventionService.get(params.get('id')))).subscribe(intervention => {
             this.intervention = intervention;
         });
 

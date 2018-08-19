@@ -10,11 +10,15 @@ export class InterventionService {
     constructor(private http: HttpClient) {
     }
 
-    getInterventions() {
+    getAll() {
         return this.http.get<InterventionDto[]>(`${environment.apiUrl}/interventions`);
     }
 
-    getIntervention(id: any) {
+    get(id: any) {
         return this.http.get<InterventionDetailDto>(`${environment.apiUrl}/interventions/${id}`);
+    }
+
+    add(intervention: InterventionDto) {
+        return this.http.put(`${environment.apiUrl}/interventions/`, intervention);
     }
 }

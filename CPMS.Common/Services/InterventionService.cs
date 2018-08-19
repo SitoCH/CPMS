@@ -9,9 +9,11 @@ namespace CPMS.Common.Services
     {
         int Count();
 
-        List<Intervention> GetInterventions();
+        List<Intervention> GetAll();
 
-        Intervention GetIntervention(int id);
+        Intervention Get(int id);
+
+        void Add(Intervention newIntervention);
     }
 
     public class InterventionService : IInterventionService
@@ -28,14 +30,20 @@ namespace CPMS.Common.Services
             return _context.Interventions.Count();
         }
 
-        public List<Intervention> GetInterventions()
+        public List<Intervention> GetAll()
         {
             return _context.Interventions.ToList();
         }
 
-        public Intervention GetIntervention(int id)
+        public Intervention Get(int id)
         {
             return _context.Interventions.SingleOrDefault(x => x.Id == id);
+        }
+
+        public void Add(Intervention intervention)
+        {
+            _context.Interventions.Add(intervention);
+            _context.SaveChanges();
         }
     }
 }

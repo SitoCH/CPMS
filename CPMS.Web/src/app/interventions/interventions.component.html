@@ -1,11 +1,11 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1>{{'Interventions' | translate}}</h1>
-    <!--<div class="btn-toolbar mb-2 mb-md-0">
+    <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
-            <button class="btn btn-sm btn-outline-secondary">Share</button>
-            <button class="btn btn-sm btn-outline-secondary">Export</button>
+            <button class="btn btn-sm btn-outline-secondary" (click)="add(content)"><i class="fa fa-plus"></i> {{'Add' | translate}}</button>
+            <!--<button class="btn btn-sm btn-outline-secondary">Export</button>-->
         </div>
-    </div>-->
+    </div>
 </div>
 
 <div>
@@ -31,3 +31,23 @@
         </tbody>
     </table>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{'NewIntervention' | translate}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="addForm">
+            <div class="form-group">
+                <label for="name">{{'Name' | translate}}</label>
+                <input id="name" class="form-control" type="text" formControlName="name"/>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="c('')">{{'Add' | translate}}</button>
+    </div>
+</ng-template>
