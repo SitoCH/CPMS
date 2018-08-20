@@ -7,3 +7,39 @@
         </div>
     </div>-->
 </div>
+
+<div>
+    <h4>{{'Journals' | translate}}</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th width="50px">Id</th>
+            <th>{{'Name' | translate}}</th>
+            <th width="40px"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngIf="journals && journals.length > 1">
+            <td>
+
+            </td>
+            <td>
+                {{'Combined' | translate}}
+            </td>
+            <td><a [routerLink]="['/', 0]" class="btn btn-outline-dark">
+                <i class="fa fa-search"></i>
+            </a>
+        </tr>
+        <tr *ngFor="let item of journals">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td><a [routerLink]="['/', item.id]" class="btn btn-outline-dark">
+                <i class="fa fa-search"></i>
+            </a>
+        </tr>
+        <tr *ngIf="!journals">
+            <td colspan="3"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

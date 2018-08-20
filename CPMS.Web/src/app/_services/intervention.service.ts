@@ -19,6 +19,6 @@ export class InterventionService {
     }
 
     add(intervention: InterventionDto) {
-        return this.http.put(`${environment.apiUrl}/interventions/`, intervention);
+        return this.http.put(`${environment.apiUrl}/interventions`, intervention);
     }
 }

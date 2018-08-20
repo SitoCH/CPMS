@@ -13,7 +13,7 @@ namespace CPMS.Common.Services
 
         Intervention Get(int id);
 
-        void Add(Intervention newIntervention);
+        Intervention Add(Intervention newIntervention);
     }
 
     public class InterventionService : IInterventionService
@@ -40,10 +40,11 @@ namespace CPMS.Common.Services
             return _context.Interventions.SingleOrDefault(x => x.Id == id);
         }
 
-        public void Add(Intervention intervention)
+        public Intervention Add(Intervention intervention)
         {
-            _context.Interventions.Add(intervention);
+            var newIntervention = _context.Interventions.Add(intervention);
             _context.SaveChanges();
+            return newIntervention.Entity;
         }
     }
 }

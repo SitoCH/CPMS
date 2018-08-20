@@ -27,6 +27,8 @@ import { InterventionsComponent } from './interventions/interventions.component'
 import { SidebarComponent } from './_directives/sidebar.component'
 import { InterventionService } from "./_services/intervention.service";;
 import { InterventionDetailComponent } from './interventions/intervention-detail.component'
+import { HubsService } from "./_services/hubs.service";
+import { JournalService } from "./_services/journal.service";
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, "/assets/i18n/", ".json");
@@ -66,6 +68,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         DashboardService,
         InterventionService,
         OrganizationalStructureService,
+        HubsService,
+        JournalService,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     ],

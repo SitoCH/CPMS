@@ -3,8 +3,10 @@ using AutoMapper;
 using CPMS.Common.Entities;
 using CPMS.Common.Services;
 using CPMS.Web.Dtos;
+using CPMS.Web.SignalR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace CPMS.Web.Controllers
 {
@@ -13,11 +15,13 @@ namespace CPMS.Web.Controllers
     {
         private readonly IInterventionService _interventionService;
         private readonly IMapper _mapper;
+        private readonly IHubContext<InterventionHub> _interventionHub;
 
-        public InterventionsController(IInterventionService interventionService, IMapper mapper)
+        public InterventionsController(IInterventionService interventionService, IMapper mapper, IHubContext<InterventionHub> interventionHub)
         {
             _interventionService = interventionService;
             _mapper = mapper;
+            _interventionHub = interventionHub;
         }
 
         [HttpGet]
@@ -36,10 +40,11 @@ namespace CPMS.Web.Controllers
         }
 
         [HttpPut]
-        public void AddIntervention(InterventionDto interventionDto)
+        public async void AddIntervention(InterventionDto interventionDto)
         {
             var newIntervention = _mapper.Map<Intervention>(interventionDto);
             _interventionService.Add(newIntervention);
+            await _interventionHub.Clients.All.SendAsync("interventionUpdated", newIntervention.Id);
         }
     }
 }

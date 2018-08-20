@@ -10,6 +10,7 @@ namespace CPMS.Web.Helpers
         {
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<Intervention, InterventionDto>().ReverseMap();
+            CreateMap<Journal, JournalDto>().ReverseMap();
         }
     }
 }

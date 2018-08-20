@@ -20,6 +20,8 @@ namespace CPMS.Common.EF
 
         public DbSet<Intervention> Interventions { get; set; }
 
+        public DbSet<Journal> Journals { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);

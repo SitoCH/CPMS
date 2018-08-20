@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using CPMS.Common.EF;
 using CPMS.Common.Services;
+using CPMS.Web.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,6 +42,8 @@ namespace CPMS.Web.Helpers
 
             services.AddAutoMapper();
 
+            services.AddSignalR();
+
             // configure strongly typed settings objects
             var appSettingsSection = _configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
@@ -74,6 +77,7 @@ namespace CPMS.Web.Helpers
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IInterventionService, InterventionService>();
             services.AddScoped<IConfigurationService, ConfigurationService>();
+            services.AddScoped<IJournalService, JournalService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -90,6 +94,11 @@ namespace CPMS.Web.Helpers
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<InterventionHub>("/hubs/intervention");
+            });
 
             app.UseSwagger();
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1"); });
