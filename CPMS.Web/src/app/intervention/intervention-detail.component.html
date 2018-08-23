@@ -1,5 +1,13 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1>{{intervention.intervention.name}}</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active"><a [routerLink]="['/interventions']">{{'Interventions' | translate}}</a></li>
+            <li class="breadcrumb-item active">{{intervention.intervention.name}}</li>
+        </ol>
+    </nav>
+
+
+
     <!--<div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
             <button class="btn btn-sm btn-outline-secondary">Share</button>
@@ -26,14 +34,14 @@
             <td>
                 {{'Combined' | translate}}
             </td>
-            <td><a [routerLink]="['/', 0]" class="btn btn-outline-dark">
+            <td><a [routerLink]="['/intervention', intervention.intervention.id, 'journal']" class="btn btn-outline-dark">
                 <i class="fa fa-search"></i>
             </a>
         </tr>
         <tr *ngFor="let item of journals">
             <td>{{item.id}}</td>
             <td>{{item.name}}</td>
-            <td><a [routerLink]="['/', item.id]" class="btn btn-outline-dark">
+            <td><a [routerLink]="['/intervention', intervention.intervention.id, 'journal', item.id]" class="btn btn-outline-dark">
                 <i class="fa fa-search"></i>
             </a>
         </tr>

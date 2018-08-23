@@ -3,14 +3,16 @@ using System;
 using CPMS.Common.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CPMS.Common.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180823205839_JournalEntryChannel")]
+    partial class JournalEntryChannel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,10 +122,10 @@ namespace CPMS.Common.Migrations
                         new { Id = 3, DateTime = new DateTime(2018, 2, 2, 8, 42, 0, 0, DateTimeKind.Unspecified), JournalEntryChannelId = 1, JournalId = 1, Text = "Messaggio PC fronte 2" },
                         new { Id = 4, DateTime = new DateTime(2018, 2, 2, 8, 45, 0, 0, DateTimeKind.Unspecified), JournalEntryChannelId = 3, JournalId = 1, Text = "Messaggio PC fronte 3" },
                         new { Id = 5, DateTime = new DateTime(2018, 2, 2, 8, 25, 0, 0, DateTimeKind.Unspecified), JournalEntryChannelId = 2, JournalId = 2, Text = "Inizio esercizio" },
-                        new { Id = 6, DateTime = new DateTime(2018, 2, 2, 8, 38, 0, 0, DateTimeKind.Unspecified), JournalEntryChannelId = 2, JournalId = 2, Text = "Messaggio PC retro 1" },
-                        new { Id = 7, DateTime = new DateTime(2018, 2, 2, 8, 40, 0, 0, DateTimeKind.Unspecified), JournalEntryChannelId = 1, JournalId = 2, Text = "Messaggio PC retro 2" },
-                        new { Id = 8, DateTime = new DateTime(2018, 2, 2, 8, 40, 0, 0, DateTimeKind.Unspecified), JournalEntryChannelId = 1, JournalId = 2, Text = "Messaggio PC retro 3" },
-                        new { Id = 9, DateTime = new DateTime(2018, 2, 2, 8, 47, 0, 0, DateTimeKind.Unspecified), JournalEntryChannelId = 2, JournalId = 2, Text = "Messaggio PC retro 4" }
+                        new { Id = 6, DateTime = new DateTime(2018, 2, 2, 8, 38, 0, 0, DateTimeKind.Unspecified), JournalEntryChannelId = 2, JournalId = 1, Text = "Messaggio PC retro 1" },
+                        new { Id = 7, DateTime = new DateTime(2018, 2, 2, 8, 40, 0, 0, DateTimeKind.Unspecified), JournalEntryChannelId = 1, JournalId = 1, Text = "Messaggio PC retro 2" },
+                        new { Id = 8, DateTime = new DateTime(2018, 2, 2, 8, 40, 0, 0, DateTimeKind.Unspecified), JournalEntryChannelId = 1, JournalId = 1, Text = "Messaggio PC retro 3" },
+                        new { Id = 9, DateTime = new DateTime(2018, 2, 2, 8, 47, 0, 0, DateTimeKind.Unspecified), JournalEntryChannelId = 2, JournalId = 1, Text = "Messaggio PC retro 4" }
                     );
                 });
 
@@ -190,7 +192,7 @@ namespace CPMS.Common.Migrations
             modelBuilder.Entity("CPMS.Common.Entities.Journal", b =>
                 {
                     b.HasOne("CPMS.Common.Entities.Intervention", "Intervention")
-                        .WithMany("Journals")
+                        .WithMany()
                         .HasForeignKey("InterventionId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

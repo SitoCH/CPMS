@@ -1,0 +1,45 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active"><a [routerLink]="['/interventions']">{{'Interventions' | translate}}</a></li>
+            <li class="breadcrumb-item active"><a [routerLink]="['/intervention', journalDetail.intervention.id]">{{journalDetail.intervention.name}}</a></li>
+            <li class="breadcrumb-item active" *ngIf="journalDetail.id > 0">{{journalDetail.name}}</li>
+            <li class="breadcrumb-item active" *ngIf="journalDetail.id == 0">{{'Combined' | translate}}</li>
+        </ol>
+    </nav>
+
+    <!--<div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <button class="btn btn-sm btn-outline-secondary">Share</button>
+            <button class="btn btn-sm btn-outline-secondary">Export</button>
+        </div>
+    </div>-->
+</div>
+
+<div>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th width="50px">Id</th>
+            <th width="150px" *ngIf="journalDetail.id == 0">{{'Journal' | translate}}</th>
+            <th width="170px">{{'Date' | translate}}</th>
+            <th>{{'Name' | translate}}</th>
+            <th width="40px"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of journalDetail.entries">
+            <td>{{item.id}}</td>
+            <td *ngIf="journalDetail.id == 0">{{item.journalName}}</td>
+            <td>{{item.dateTime | date:'dd.MM.yyyy HH:mm'}}</td>
+            <td>{{item.text}}</td>
+            <td><i class="fa" ngClass="{{item.channelIcon}}"></i></td>
+        </tr>
+        <tr *ngIf="!journalDetail">
+            <td [colSpan]="journalDetail.id == 0 ? 5 : 4"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+

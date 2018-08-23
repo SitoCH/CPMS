@@ -22,6 +22,8 @@ namespace CPMS.Common.EF
 
         public DbSet<Journal> Journals { get; set; }
 
+        public DbSet<JournalEntryChannel> JournalEntryChannels { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -199,7 +201,7 @@ namespace CPMS.Common.EF
                     JournalEntryChannelId = 2,
                     Text = "Messaggio PC retro 1",
                     DateTime = new DateTime(2018, 2, 2, 8, 38, 0),
-                    JournalId = 1
+                    JournalId = 2
                 },
                 new JournalEntry
                 {
@@ -207,7 +209,7 @@ namespace CPMS.Common.EF
                     JournalEntryChannelId = 1,
                     Text = "Messaggio PC retro 2",
                     DateTime = new DateTime(2018, 2, 2, 8, 40, 0),
-                    JournalId = 1
+                    JournalId = 2
                 },
                 new JournalEntry
                 {
@@ -215,7 +217,7 @@ namespace CPMS.Common.EF
                     JournalEntryChannelId = 1,
                     Text = "Messaggio PC retro 3",
                     DateTime = new DateTime(2018, 2, 2, 8, 40, 0),
-                    JournalId = 1
+                    JournalId = 2
                 },
                 new JournalEntry
                 {
@@ -223,7 +225,7 @@ namespace CPMS.Common.EF
                     JournalEntryChannelId = 2,
                     Text = "Messaggio PC retro 4",
                     DateTime = new DateTime(2018, 2, 2, 8, 47, 0),
-                    JournalId = 1
+                    JournalId = 2
                 });
         }
     }

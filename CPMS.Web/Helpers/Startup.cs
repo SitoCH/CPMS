@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace CPMS.Web.Helpers
@@ -38,7 +39,12 @@ namespace CPMS.Web.Helpers
 
             services.AddCors();
 
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+                    options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
+                });
 
             services.AddAutoMapper();
 
@@ -95,10 +101,7 @@ namespace CPMS.Web.Helpers
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
-            app.UseSignalR(routes =>
-            {
-                routes.MapHub<InterventionHub>("/hubs/intervention");
-            });
+            app.UseSignalR(routes => { routes.MapHub<InterventionHub>("/hubs/intervention"); });
 
             app.UseSwagger();
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1"); });

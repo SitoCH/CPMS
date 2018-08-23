@@ -22,13 +22,14 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { OrganizationalStructureService } from "./_services/organizationalStructure.service";
 import { GroupStructureComponent } from './organizational-structure/group-structure.component';
-import { InterventionsComponent } from './interventions/interventions.component'
+import { InterventionsComponent } from './intervention/interventions.component'
     ;
 import { SidebarComponent } from './_directives/sidebar.component'
 import { InterventionService } from "./_services/intervention.service";;
-import { InterventionDetailComponent } from './interventions/intervention-detail.component'
+import { InterventionDetailComponent } from './intervention/intervention-detail.component'
 import { HubsService } from "./_services/hubs.service";
-import { JournalService } from "./_services/journal.service";
+import { JournalService } from "./_services/journal.service";;
+import { JournalDetailComponent } from './intervention/journal/journal-detail.component'
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, "/assets/i18n/", ".json");
@@ -59,7 +60,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         GroupStructureComponent,
         InterventionsComponent,
         SidebarComponent,
-        InterventionDetailComponent],
+        InterventionDetailComponent,
+        JournalDetailComponent
+    ],
     providers: [
         AuthGuard,
         AlertService,
