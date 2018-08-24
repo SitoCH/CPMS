@@ -20,4 +20,7 @@ export class JournalService {
         return this.http.get<JournalDetailDto>(`${environment.apiUrl}/Journals/Detail/${intervention}/${journal || 0}`);
     }
 
+    add(interventionId: number, journal: JournalDto) {
+        return this.http.put(`${environment.apiUrl}/Journals/${interventionId}`, journal);
+    }
 }

@@ -6,6 +6,7 @@ import { environment } from "../../environments/environment";
 export class HubsService {
 
     public interventionUpdated = new EventEmitter<number>();
+    public journalUpdated = new EventEmitter<JournalUpdatedEvent>();
     private connection: signalR.HubConnection;
 
     connect() {
@@ -18,6 +19,13 @@ export class HubsService {
                 this.interventionUpdated.emit(id);
             });
 
+            this.connection.on("journalUpdated", (interventionId, journalId) => {
+                this.journalUpdated.emit({
+                    interventionId: interventionId,
+                    journalId: journalId
+                });
+            });
+
             this.connection.start().catch(err => console.error(err));
         }
     }
@@ -28,5 +36,12 @@ export class HubsService {
             this.connection = null;
         }
     }
+
+}
+
+export interface JournalUpdatedEvent {
+
+    interventionId: number;
+    journalId: number;
 
 }

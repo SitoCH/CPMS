@@ -12,14 +12,12 @@
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
-            <th width="50px">Id</th>
             <th>{{'Name' | translate}}</th>
             <th width="40px"></th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let item of interventions">
-            <td>{{item.id}}</td>
             <td>{{item.name}}</td>
             <td><a [routerLink]="['/intervention', item.id]" class="btn btn-outline-dark">
                 <i class="fa fa-search"></i>

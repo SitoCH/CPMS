@@ -6,14 +6,12 @@
         </ol>
     </nav>
 
-
-
-    <!--<div class="btn-toolbar mb-2 mb-md-0">
+    <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
-            <button class="btn btn-sm btn-outline-secondary">Share</button>
-            <button class="btn btn-sm btn-outline-secondary">Export</button>
+            <button class="btn btn-sm btn-outline-secondary" (click)="add(content)"><i class="fa fa-plus"></i> {{'Add' | translate}}</button>
+            <!--<button class="btn btn-sm btn-outline-secondary">Export</button>-->
         </div>
-    </div>-->
+    </div>
 </div>
 
 <div>
@@ -21,16 +19,12 @@
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
-            <th width="50px">Id</th>
             <th>{{'Name' | translate}}</th>
             <th width="40px"></th>
         </tr>
         </thead>
         <tbody>
         <tr *ngIf="journals && journals.length > 1">
-            <td>
-
-            </td>
             <td>
                 {{'Combined' | translate}}
             </td>
@@ -39,7 +33,6 @@
             </a>
         </tr>
         <tr *ngFor="let item of journals">
-            <td>{{item.id}}</td>
             <td>{{item.name}}</td>
             <td><a [routerLink]="['/intervention', intervention.intervention.id, 'journal', item.id]" class="btn btn-outline-dark">
                 <i class="fa fa-search"></i>
@@ -51,3 +44,23 @@
         </tbody>
     </table>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{'NewJournal' | translate}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="addForm">
+            <div class="form-group">
+                <label for="name">{{'Name' | translate}}</label>
+                <input id="name" class="form-control" type="text" formControlName="name"/>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="c('')">{{'Add' | translate}}</button>
+    </div>
+</ng-template>

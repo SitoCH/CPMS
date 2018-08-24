@@ -15,20 +15,34 @@ namespace CPMS.Web.Controllers
     public class JournalsController : ControllerBase
     {
         private readonly IInterventionService _interventionService;
+        private readonly IHubContext<InterventionHub> _interventionHub;
         private readonly IJournalService _journalService;
         private readonly IMapper _mapper;
 
-        public JournalsController(IJournalService journalService, IMapper mapper, IInterventionService interventionService)
+        public JournalsController(IJournalService journalService,
+            IMapper mapper,
+            IInterventionService interventionService,
+            IHubContext<InterventionHub> interventionHub)
         {
             _journalService = journalService;
             _mapper = mapper;
             _interventionService = interventionService;
+            _interventionHub = interventionHub;
         }
 
-        [HttpGet("{intervention}")]
-        public ActionResult<List<JournalDto>> GetJournals(int intervention)
+        [HttpGet("{interventionId}")]
+        public ActionResult<List<JournalDto>> GetJournals(int interventionId)
         {
-            return _mapper.Map<List<JournalDto>>(_journalService.GetAllByIntervention(intervention));
+            return _mapper.Map<List<JournalDto>>(_journalService.GetAllByIntervention(interventionId));
+        }
+
+        [HttpPut("/Journals/{interventionId}")]
+        public async void AddJournal(int interventionId, JournalDto journalDto)
+        {
+            var newJournal = _mapper.Map<Journal>(journalDto);
+            newJournal.InterventionId = interventionId;
+            _journalService.Add(newJournal);
+            await _interventionHub.Clients.All.SendAsync("journalUpdated", interventionId, newJournal.Id);
         }
 
         [HttpGet("/Journals/Detail/{interventionId}/{journalId}")]
