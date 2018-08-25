@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 
     <nav>
-        <ol class="breadcrumb">
+        <ol class="header-breadcrumb breadcrumb">
             <li class="breadcrumb-item active"><a [routerLink]="['/interventions']">{{'Interventions' | translate}}</a></li>
             <li class="breadcrumb-item active"><a [routerLink]="['/intervention', journalDetail.intervention.id]">{{journalDetail.intervention.name}}</a></li>
             <li class="breadcrumb-item active" *ngIf="journalDetail.id > 0">{{journalDetail.name}}</li>
