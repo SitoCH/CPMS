@@ -41,14 +41,30 @@
             width: 45%;
         }
     }
+
+    .logo {
+        height: 40px;
+        margin-right: 10px;
+    }
+
+    .navbar-dark {
+        background-color: #4980b5;
+    }
+
+    #sidebar {
+        background-color: #262D33;
+        padding-right: 0;
+    }
+
 </style>
 
-<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-primary mb-3" *ngIf="showNavBars">
+<nav class="navbar fixed-top navbar-expand-md navbar-dark mb-3" *ngIf="showNavBars">
 
     <div class="flex-row d-flex">
         <button type="button" class="navbar-toggler mr-2" data-toggle="offcanvas" (click)="toggleSidebar()">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <img src="assets/logo.png" class="logo" />
         <a class="navbar-brand" [routerLink]="['/']">CPMS</a>
     </div>
 
@@ -60,8 +76,8 @@
 </nav>
 
 <div class="container-fluid" id="main">
-    <div class="row row-offcanvas row-offcanvas-left" [ngClass]="{'active': showSidebar}">
-        <div class="col-md-3 col-lg-2 sidebar-offcanvas bg-light pl-0" id="sidebar" role="navigation" *ngIf="showNavBars">
+    <div class="row row-offcanvas row-offcanvas-left vh-100" [ngClass]="{'active': showSidebar}">
+        <div class="col-md-3 col-lg-2 sidebar-offcanvas pl-0" id="sidebar" role="navigation" *ngIf="showNavBars">
             <sidebar></sidebar>
         </div>
         <!--/col-->
