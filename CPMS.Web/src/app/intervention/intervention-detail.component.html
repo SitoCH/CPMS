@@ -1,48 +1,59 @@
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <nav>
-        <ol class="header-breadcrumb breadcrumb">
-            <li class="breadcrumb-item active"><a [routerLink]="['/interventions']">{{'Interventions' | translate}}</a></li>
-            <li class="breadcrumb-item active">{{intervention.intervention.name}}</li>
-        </ol>
-    </nav>
-
-    <div class="btn-toolbar mb-2 mb-md-0">
-        <div class="btn-group mr-2">
-            <button class="btn btn-sm btn-outline-secondary" (click)="add(content)"><i class="fa fa-plus"></i> {{'Add' | translate}}</button>
-            <!--<button class="btn btn-sm btn-outline-secondary">Export</button>-->
+<div class="row page-title-row">
+    <div class="col-xl-12">
+        <div class="breadcrumb-holder">
+            <ol class="breadcrumb float-left">
+                <li class="breadcrumb-item"><a [routerLink]="['/interventions']">{{'Interventions' | translate}}</a></li>
+                <li class="breadcrumb-item active">{{intervention.intervention.name}}</li>
+            </ol>
+            <div class="float-right">
+                <button class="btn btn-sm btn-outline-secondary" (click)="add(content)"><i class="fa fa-plus"></i> {{'Add' | translate}}</button>
+                <!--<button class="btn btn-sm btn-outline-secondary">Export</button>-->
+            </div>
+            <div class="clearfix"></div>
         </div>
     </div>
 </div>
 
-<div>
-    <h4>{{'Journals' | translate}}</h4>
-    <table class="table table-bordered table-striped">
-        <thead>
-        <tr>
-            <th>{{'Name' | translate}}</th>
-            <th width="40px"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngIf="journals && journals.length > 1">
-            <td>
-                {{'Combined' | translate}}
-            </td>
-            <td><a [routerLink]="['/intervention', intervention.intervention.id, 'journal']" class="btn btn-outline-dark">
-                <i class="fa fa-search"></i>
-            </a>
-        </tr>
-        <tr *ngFor="let item of journals">
-            <td>{{item.name}}</td>
-            <td><a [routerLink]="['/intervention', intervention.intervention.id, 'journal', item.id]" class="btn btn-outline-dark">
-                <i class="fa fa-search"></i>
-            </a>
-        </tr>
-        <tr *ngIf="!journals">
-            <td colspan="3"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>
-        </tr>
-        </tbody>
-    </table>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card mb-3">
+            <div class="card-header">
+                <h3><i class="fa fa-book"></i> {{'Journals' | translate}}</h3>
+            </div>
+
+            <div class="card-body">
+
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>{{'Name' | translate}}</th>
+                        <th width="40px"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngIf="journals && journals.length > 1">
+                        <td>
+                            {{'Combined' | translate}}
+                        </td>
+                        <td><a [routerLink]="['/intervention', intervention.intervention.id, 'journal']">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </tr>
+                    <tr *ngFor="let item of journals">
+                        <td>{{item.name}}</td>
+                        <td><a [routerLink]="['/intervention', intervention.intervention.id, 'journal', item.id]">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </tr>
+                    <tr *ngIf="!journals">
+                        <td colspan="3"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
 </div>
 
 <ng-template #content let-c="close" let-d="dismiss">
