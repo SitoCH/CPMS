@@ -9,6 +9,8 @@ namespace CPMS.Common.Services
     {
         int Count();
 
+        int CountActive();
+
         List<Intervention> GetAll();
 
         Intervention Get(int id);
@@ -28,6 +30,11 @@ namespace CPMS.Common.Services
         public int Count()
         {
             return _context.Interventions.Count();
+        }
+
+        public int CountActive()
+        {
+            return _context.Interventions.Count(x => x.IsActive);
         }
 
         public List<Intervention> GetAll()

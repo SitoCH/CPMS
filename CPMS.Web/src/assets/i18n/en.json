@@ -16,5 +16,8 @@
     "Journals": "Journals",
     "Journal": "Journal",
     "Combined": "Combined",
-    "Date": "Date"
+    "Date": "Date",
+    "ActiveInterventions": "Active interventions",
+    "ClosedInterventions": "Closed interventions",
+    "From": "From"
 }

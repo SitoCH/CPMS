@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap } from "@angular/router";
 import { JournalService } from "../../_services/journal.service";
 import { switchMap } from "rxjs/operators";
 import { JournalDetailDto } from "../../_models/journalDetailDto";
+import { JournalEntryDto } from "../../_models/journalEntryDto";
 
 @Component({
     selector: 'app-journal-detail',
@@ -27,5 +28,4 @@ export class JournalDetailComponent implements OnInit {
                 this.journalDetail = journalDetail;
             });
     }
-
 }

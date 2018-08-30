@@ -12,7 +12,8 @@ import { HubsService } from "../_services/hubs.service";
 })
 export class InterventionsComponent implements OnInit, OnDestroy {
 
-    public interventions: InterventionDto[];
+    public activeInterventions: InterventionDto[];
+    public closedInterventions: InterventionDto[];
     public addForm: FormGroup;
 
     constructor(private formBuilder: FormBuilder,
@@ -39,7 +40,8 @@ export class InterventionsComponent implements OnInit, OnDestroy {
 
     private refreshInterventions() {
         this.interventionService.getAll().subscribe(interventions => {
-            this.interventions = interventions;
+            this.activeInterventions = interventions.filter(x => x.isActive);
+            this.closedInterventions = interventions.filter(x => !x.isActive);
         });
     }
 
@@ -51,7 +53,8 @@ export class InterventionsComponent implements OnInit, OnDestroy {
             }
             this.interventionService.add({
                 id: 0,
-                name: this.addForm.controls.name.value
+                name: this.addForm.controls.name.value,
+                isActive: true
             }).subscribe(() => {
                 this.addForm.reset();
             });

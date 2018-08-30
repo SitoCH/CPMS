@@ -17,7 +17,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="card mb-3">
             <div class="card-header">
-                <h3><i class="fa fa-warning"></i> {{'Interventions' | translate}}</h3>
+                <h3><i class="fa fa-warning"></i> {{'ActiveInterventions' | translate}}</h3>
             </div>
 
             <div class="card-body">
@@ -30,13 +30,47 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let item of interventions">
+                    <tr *ngFor="let item of activeInterventions">
                         <td>{{item.name}}</td>
                         <td><a [routerLink]="['/intervention', item.id]">
                             <i class="fa fa-search"></i>
                         </a>
                     </tr>
-                    <tr *ngIf="!interventions">
+                    <tr *ngIf="!activeInterventions">
+                        <td colspan="3"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card mb-3">
+            <div class="card-header">
+                <h3><i class="fa fa-power-off"></i> {{'ClosedInterventions' | translate}}</h3>
+            </div>
+
+            <div class="card-body">
+
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>{{'Name' | translate}}</th>
+                        <th width="40px"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of closedInterventions">
+                        <td>{{item.name}}</td>
+                        <td><a [routerLink]="['/intervention', item.id]">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </tr>
+                    <tr *ngIf="!closedInterventions">
                         <td colspan="3"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>
                     </tr>
                     </tbody>

@@ -9,6 +9,8 @@ namespace CPMS.Common.Entities
 
         public string Name { get; set; }
 
+        public bool IsActive { get; set; }
+
         [InverseProperty("Intervention")]
         public virtual List<Journal> Journals { get; set; }
     }

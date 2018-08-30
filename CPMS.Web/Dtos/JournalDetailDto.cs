@@ -10,6 +10,6 @@ namespace CPMS.Web.Dtos
 
         public InterventionDto Intervention { get; set; }
 
-        public List<JournalEntryDto> Entries { get; set; }
+        public JournalEntryDto[] Entries { get; set; }
     }
 }

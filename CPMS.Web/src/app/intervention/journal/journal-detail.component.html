@@ -25,24 +25,35 @@
 
             <div class="card-body">
 
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered">
                     <thead>
                     <tr>
                         <th width="50px">Id</th>
                         <th width="150px" *ngIf="journalDetail.id == 0">{{'Journal' | translate}}</th>
                         <th width="170px">{{'Date' | translate}}</th>
-                        <th>{{'Name' | translate}}</th>
+                        <th>{{'From' | translate}}</th>
                         <th width="40px"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let item of journalDetail.entries">
-                        <td>{{item.id}}</td>
-                        <td *ngIf="journalDetail.id == 0">{{item.journalName}}</td>
-                        <td>{{item.dateTime | date:'dd.MM.yyyy HH:mm'}}</td>
-                        <td>{{item.text}}</td>
-                        <td><i class="fa" ngClass="{{item.channelIcon}}"></i></td>
-                    </tr>
+                    <ng-container *ngFor="let item of journalDetail.entries; let index = index;">
+                        <tr [ngClass]="{'alternate-row': (index % 2 == 0)}">
+                            <td>{{item.id}}</td>
+                            <td *ngIf="journalDetail.id == 0">{{item.journalName}}</td>
+                            <td>{{item.dateTime | date:'dd.MM.yyyy HH:mm'}}</td>
+                            <td>
+                                {{item.person}}
+                            </td>
+                            <td><i class="fa" ngClass="{{item.channelIcon}}"></i></td>
+                        </tr>
+                        <tr [ngClass]="{'alternate-row': (index % 2 == 0)}">
+                            <td [colSpan]="journalDetail.id == 0 ? 5 : 4">
+                                <quill-editor [(ngModel)]="item.text" [readOnly]="true" [modules]="{toolbar: false}"></quill-editor>
+                            </td>
+                        </tr>
+                    </ng-container>
+
+
                     <tr *ngIf="!journalDetail">
                         <td [colSpan]="journalDetail.id == 0 ? 5 : 4"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>
                     </tr>

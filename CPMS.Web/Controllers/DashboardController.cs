@@ -23,7 +23,7 @@ namespace CPMS.Web.Controllers
             return new DashboardDto
             {
                 Users = _userService.Count(),
-                Interventions = _interventionService.Count()
+                Interventions = _interventionService.CountActive()
             };
         }
     }

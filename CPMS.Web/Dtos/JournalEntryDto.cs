@@ -13,5 +13,7 @@ namespace CPMS.Web.Dtos
         public string ChannelIcon { get; set; }
 
         public string JournalName { get; set; }
+
+        public string Person { get; set; }
     }
 }

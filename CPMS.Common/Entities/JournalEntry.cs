@@ -10,6 +10,8 @@ namespace CPMS.Common.Entities
 
         public string Text { get; set; }
 
+        public string Person { get; set; }
+
         public int JournalId { get; set; }
         public virtual Journal Journal { get; set; }
 

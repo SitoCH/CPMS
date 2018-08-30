@@ -16,5 +16,8 @@
     "Journals": "Giornali",
     "Journal": "Giornale",
     "Combined": "Combinati",
-    "Date": "Data"
+    "Date": "Data",
+    "ActiveInterventions": "Interventi attivi",
+    "ClosedInterventions": "Interventi chiusi",
+    "From": "Da"
 }

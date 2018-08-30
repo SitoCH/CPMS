@@ -141,7 +141,18 @@ namespace CPMS.Common.EF
                     Icon = "fa-envelope "
                 });
 
-            modelBuilder.Entity<Intervention>().HasData(new Intervention { Id = 1, Name = "Intervento demo" });
+            modelBuilder.Entity<Intervention>().HasData(new Intervention
+                {
+                    Id = 1,
+                    Name = "Intervento demo",
+                    IsActive = true
+                },
+                new Intervention
+                {
+                    Id = 2,
+                    Name = "Intervento chiuso",
+                    IsActive = false
+                });
 
             modelBuilder.Entity<Journal>().HasData(new Journal
             {
@@ -160,6 +171,7 @@ namespace CPMS.Common.EF
                     Id = 1,
                     JournalEntryChannelId = 2,
                     Text = "Inizio esercizio",
+                    Person = "SM PCi",
                     DateTime = new DateTime(2018, 2, 2, 8, 30, 0),
                     JournalId = 1
                 },
@@ -168,6 +180,7 @@ namespace CPMS.Common.EF
                     Id = 2,
                     JournalEntryChannelId = 1,
                     Text = "Messaggio PC fronte 1",
+                    Person = "144",
                     DateTime = new DateTime(2018, 2, 2, 8, 36, 0),
                     JournalId = 1
                 },
@@ -176,6 +189,7 @@ namespace CPMS.Common.EF
                     Id = 3,
                     JournalEntryChannelId = 1,
                     Text = "Messaggio PC fronte 2",
+                    Person = "117",
                     DateTime = new DateTime(2018, 2, 2, 8, 42, 0),
                     JournalId = 1
                 },
@@ -183,7 +197,8 @@ namespace CPMS.Common.EF
                 {
                     Id = 4,
                     JournalEntryChannelId = 3,
-                    Text = "Messaggio PC fronte 3",
+                    Text = "Messaggio <b>PC fronte</b> 3",
+                    Person = "117",
                     DateTime = new DateTime(2018, 2, 2, 8, 45, 0),
                     JournalId = 1
                 },
@@ -192,6 +207,7 @@ namespace CPMS.Common.EF
                     Id = 5,
                     JournalEntryChannelId = 2,
                     Text = "Inizio esercizio",
+                    Person = "SM PCi",
                     DateTime = new DateTime(2018, 2, 2, 8, 25, 0),
                     JournalId = 2
                 },
@@ -200,6 +216,7 @@ namespace CPMS.Common.EF
                     Id = 6,
                     JournalEntryChannelId = 2,
                     Text = "Messaggio PC retro 1",
+                    Person = "117",
                     DateTime = new DateTime(2018, 2, 2, 8, 38, 0),
                     JournalId = 2
                 },
@@ -208,6 +225,7 @@ namespace CPMS.Common.EF
                     Id = 7,
                     JournalEntryChannelId = 1,
                     Text = "Messaggio PC retro 2",
+                    Person = "117",
                     DateTime = new DateTime(2018, 2, 2, 8, 40, 0),
                     JournalId = 2
                 },
@@ -216,6 +234,7 @@ namespace CPMS.Common.EF
                     Id = 8,
                     JournalEntryChannelId = 1,
                     Text = "Messaggio PC retro 3",
+                    Person = "144",
                     DateTime = new DateTime(2018, 2, 2, 8, 40, 0),
                     JournalId = 2
                 },
@@ -224,6 +243,7 @@ namespace CPMS.Common.EF
                     Id = 9,
                     JournalEntryChannelId = 2,
                     Text = "Messaggio PC retro 4",
+                    Person = "Care team",
                     DateTime = new DateTime(2018, 2, 2, 8, 47, 0),
                     JournalId = 2
                 });

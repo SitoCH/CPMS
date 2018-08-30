@@ -1,6 +1,6 @@
 ﻿import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -22,14 +22,14 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { OrganizationalStructureService } from "./_services/organizationalStructure.service";
 import { GroupStructureComponent } from './organizational-structure/group-structure.component';
-import { InterventionsComponent } from './intervention/interventions.component'
-    ;
+import { InterventionsComponent } from './intervention/interventions.component';
 import { SidebarComponent } from './_directives/sidebar.component'
-import { InterventionService } from "./_services/intervention.service";;
-import { InterventionDetailComponent } from './intervention/intervention-detail.component'
+import { InterventionService } from "./_services/intervention.service";
+import { InterventionDetailComponent } from './intervention/intervention-detail.component';
 import { HubsService } from "./_services/hubs.service";
-import { JournalService } from "./_services/journal.service";;
-import { JournalDetailComponent } from './intervention/journal/journal-detail.component'
+import { JournalService } from "./_services/journal.service";
+import { JournalDetailComponent } from './intervention/journal/journal-detail.component';
+import { QuillModule } from "ngx-quill";
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, "/assets/i18n/", ".json");
@@ -38,9 +38,11 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
     imports: [
         BrowserModule,
+        FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
         routing,
+        QuillModule,
         NgbModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
