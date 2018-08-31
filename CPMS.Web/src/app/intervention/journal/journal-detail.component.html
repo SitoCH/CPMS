@@ -32,6 +32,7 @@
                         <th width="150px" *ngIf="journalDetail.id == 0">{{'Journal' | translate}}</th>
                         <th width="170px">{{'Date' | translate}}</th>
                         <th>{{'From' | translate}}</th>
+                        <th width="120px">{{'Direction' | translate}}</th>
                         <th width="40px"></th>
                     </tr>
                     </thead>
@@ -44,10 +45,13 @@
                             <td>
                                 {{item.person}}
                             </td>
+                            <td>
+                                <i class="fa" ngClass="{{(item.direction == 0 ? 'fa-arrow-down' : 'fa-arrow-up')}}"></i> {{(item.direction == 0 ? 'Incoming' : 'Outgoing') | translate}}
+                            </td>
                             <td><i class="fa" ngClass="{{item.channelIcon}}"></i></td>
                         </tr>
                         <tr [ngClass]="{'alternate-row': (index % 2 == 0)}">
-                            <td [colSpan]="journalDetail.id == 0 ? 5 : 4">
+                            <td [colSpan]="journalDetail.id == 0 ? 6 : 5">
                                 <quill-editor [(ngModel)]="item.text" [readOnly]="true" [modules]="{toolbar: false}"></quill-editor>
                             </td>
                         </tr>
@@ -55,7 +59,7 @@
 
 
                     <tr *ngIf="!journalDetail">
-                        <td [colSpan]="journalDetail.id == 0 ? 5 : 4"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>
+                        <td [colSpan]="journalDetail.id == 0 ? 6 : 5"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>
                     </tr>
                     </tbody>
                 </table>

@@ -190,6 +190,7 @@ namespace CPMS.Common.EF
                     JournalEntryChannelId = 1,
                     Text = "Messaggio PC fronte 2",
                     Person = "117",
+                    Direction = JournalEntryDirection.Outgoing,
                     DateTime = new DateTime(2018, 2, 2, 8, 42, 0),
                     JournalId = 1
                 },
@@ -226,6 +227,7 @@ namespace CPMS.Common.EF
                     JournalEntryChannelId = 1,
                     Text = "Messaggio PC retro 2",
                     Person = "117",
+                    Direction = JournalEntryDirection.Outgoing,
                     DateTime = new DateTime(2018, 2, 2, 8, 40, 0),
                     JournalId = 2
                 },
@@ -245,6 +247,15 @@ namespace CPMS.Common.EF
                     Text = "Messaggio PC retro 4",
                     Person = "Care team",
                     DateTime = new DateTime(2018, 2, 2, 8, 47, 0),
+                    JournalId = 2
+                }, new JournalEntry
+                {
+                    Id = 10,
+                    JournalEntryChannelId = 2,
+                    Text = "<h1>Titolo</h1><div><br></div><div>Testo messaggio.</div><div><span style=\"color: rgb(230, 0, 0);\">Informazioni importanti:</span></div><div><br></div><ol><li>Info 1</li><li>Info 2</li><li>Info 3</li></ol><div><br></div><div><br></div>",
+                    Person = "Care team",
+                    Direction = JournalEntryDirection.Outgoing,
+                    DateTime = new DateTime(2018, 2, 2, 8, 50, 0),
                     JournalId = 2
                 });
         }

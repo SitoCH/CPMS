@@ -12,6 +12,8 @@ namespace CPMS.Common.Entities
 
         public string Person { get; set; }
 
+        public JournalEntryDirection Direction { get; set; }
+
         public int JournalId { get; set; }
         public virtual Journal Journal { get; set; }
 

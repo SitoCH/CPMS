@@ -1,4 +1,5 @@
 using System;
+using CPMS.Common.Entities;
 
 namespace CPMS.Web.Dtos
 {
@@ -15,5 +16,7 @@ namespace CPMS.Web.Dtos
         public string JournalName { get; set; }
 
         public string Person { get; set; }
+
+        public JournalEntryDirection Direction { get; set; }
     }
 }

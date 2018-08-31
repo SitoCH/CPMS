@@ -19,5 +19,8 @@
     "Date": "Date",
     "ActiveInterventions": "Active interventions",
     "ClosedInterventions": "Closed interventions",
-    "From": "From"
+    "From": "From",
+    "Direction": "Direction",
+    "Incoming": "Incoming",
+    "Outgoing": "Outgoing"
 }

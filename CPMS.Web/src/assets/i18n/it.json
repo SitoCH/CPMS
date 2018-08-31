@@ -19,5 +19,8 @@
     "Date": "Data",
     "ActiveInterventions": "Interventi attivi",
     "ClosedInterventions": "Interventi chiusi",
-    "From": "Da"
+    "From": "Da",
+    "Direction": "Direzione",
+    "Incoming": "Entrata",
+    "Outgoing": "Uscita"
 }
