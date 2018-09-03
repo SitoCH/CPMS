@@ -1,3 +1,23 @@
 .alternate-row {
     background-color: rgba(0,0,0,.05);
 }
+
+.journal-header-row {
+    border: 1px solid #dee2e6;
+    border-bottom-width: 2px;
+    font-weight: bold;
+    padding: .75rem 0;
+}
+
+.journal-row {
+    border-top: 1px solid #dee2e6;
+    border-left:  1px solid #dee2e6;
+    border-right:  1px solid #dee2e6;
+    padding: .25rem 0;
+}
+
+.journal-bottom-row {
+    border: 1px solid #dee2e6;
+    border-bottom-width: 2px;
+}
+

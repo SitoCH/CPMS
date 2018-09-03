@@ -22,5 +22,9 @@
     "From": "Da",
     "Direction": "Direzione",
     "Incoming": "Entrata",
-    "Outgoing": "Uscita"
+    "Outgoing": "Uscita",
+    "Mobile": "Cellulare",
+    "Phone": "Telefono",
+    "Channel": "Canale",
+    "Id": "Nr"
 }

@@ -24,46 +24,36 @@
             </div>
 
             <div class="card-body">
+                <ng-container *ngFor="let item of journalDetail.entries; let index = index;">
+                    <div class="row journal-row" [ngClass]="{'alternate-row': (index % 2 == 0)}">
+                        <div class="col-sm-2">
+                            <b>{{'Id' | translate}}</b> {{item.id}}
+                        </div>
+                        <div class="col-sm-5">
+                            <b>{{'Date' | translate}}</b> {{item.dateTime | date:'dd.MM.yyyy HH:mm'}}
+                        </div>
+                        <div class="col-sm-2">
+                            <i class="fa" ngClass="{{(item.direction == 0 ? 'fa-arrow-down' : 'fa-arrow-up')}}"></i> {{(item.direction == 0 ? 'Incoming' : 'Outgoing') | translate}}
+                        </div>
+                        <div class="col-sm-3">
+                            <i class="fa" ngClass="{{item.channelIcon}}"></i> {{item.channelName | translate}}
+                        </div>
+                    </div>
+                    <div class="row journal-row" [ngClass]="{'alternate-row': (index % 2 == 0)}">
+                        <div class="col-sm-7">
+                            <b>{{'From' | translate}}</b> {{item.person}}
+                        </div>
+                        <div class="col-sm-5" *ngIf="journalDetail.id == 0">
+                            <b>{{'Journal' | translate}}</b> {{item.journalName}}
+                        </div>
 
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th width="50px">Id</th>
-                        <th width="150px" *ngIf="journalDetail.id == 0">{{'Journal' | translate}}</th>
-                        <th width="170px">{{'Date' | translate}}</th>
-                        <th>{{'From' | translate}}</th>
-                        <th width="120px">{{'Direction' | translate}}</th>
-                        <th width="40px"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <ng-container *ngFor="let item of journalDetail.entries; let index = index;">
-                        <tr [ngClass]="{'alternate-row': (index % 2 == 0)}">
-                            <td>{{item.id}}</td>
-                            <td *ngIf="journalDetail.id == 0">{{item.journalName}}</td>
-                            <td>{{item.dateTime | date:'dd.MM.yyyy HH:mm'}}</td>
-                            <td>
-                                {{item.person}}
-                            </td>
-                            <td>
-                                <i class="fa" ngClass="{{(item.direction == 0 ? 'fa-arrow-down' : 'fa-arrow-up')}}"></i> {{(item.direction == 0 ? 'Incoming' : 'Outgoing') | translate}}
-                            </td>
-                            <td><i class="fa" ngClass="{{item.channelIcon}}"></i></td>
-                        </tr>
-                        <tr [ngClass]="{'alternate-row': (index % 2 == 0)}">
-                            <td [colSpan]="journalDetail.id == 0 ? 6 : 5">
-                                <quill-editor [(ngModel)]="item.text" [readOnly]="true" [modules]="{toolbar: false}"></quill-editor>
-                            </td>
-                        </tr>
-                    </ng-container>
-
-
-                    <tr *ngIf="!journalDetail">
-                        <td [colSpan]="journalDetail.id == 0 ? 6 : 5"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></td>
-                    </tr>
-                    </tbody>
-                </table>
-
+                    </div>
+                    <div class="row journal-bottom-row" [ngClass]="{'alternate-row': (index % 2 == 0)}">
+                        <div class="col">
+                            <quill-editor [(ngModel)]="item.text" [readOnly]="true" [modules]="{toolbar: false}"></quill-editor>
+                        </div>
+                    </div>
+                </ng-container>
             </div>
         </div>
     </div>

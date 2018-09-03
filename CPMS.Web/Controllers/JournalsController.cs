@@ -75,6 +75,7 @@ namespace CPMS.Web.Controllers
                     Text = x.Text,
                     DateTime = x.DateTime,
                     ChannelIcon = x.JournalEntryChannel.Icon,
+                    ChannelName = x.JournalEntryChannel.Name,
                     Person = x.Person,
                     Direction = x.Direction
                 }).OrderByDescending(x => x.DateTime).ToArray()

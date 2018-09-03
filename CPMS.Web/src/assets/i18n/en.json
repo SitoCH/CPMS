@@ -22,5 +22,9 @@
     "From": "From",
     "Direction": "Direction",
     "Incoming": "Incoming",
-    "Outgoing": "Outgoing"
+    "Outgoing": "Outgoing",
+    "Mobile": "Mobile",
+    "Phone": "Phone",
+    "Channel": "Channel",
+    "Id": "Id"
 }
