@@ -6,10 +6,15 @@ import { InterventionDto } from "../_models/interventionDto";
 import { InterventionDetailDto } from "../_models/interventionDetailDto";
 import { JournalDto } from "../_models/journalDto";
 import { JournalDetailDto } from "../_models/journalDetailDto";
+import { JournalEntryChannelDto } from "../_models/journalEntryChannelDto";
 
 @Injectable()
 export class JournalService {
     constructor(private http: HttpClient) {
+    }
+
+    getChannels() {
+        return this.http.get<JournalEntryChannelDto[]>(`${environment.apiUrl}/journals/Channels`);
     }
 
     getAllByIntervention(intervention: number) {

@@ -8,8 +8,8 @@
                 <li class="breadcrumb-item active" *ngIf="journalDetail.id == 0">{{'Combined' | translate}}</li>
             </ol>
             <div class="float-right">
-                <!--<button class="btn btn-sm btn-outline-secondary" (click)="add(content)"><i class="fa fa-plus"></i> {{'Add' | translate}}</button>
-                <button class="btn btn-sm btn-outline-secondary">Export</button>-->
+                <button *ngIf="journalDetail.id != 0" class="btn btn-sm btn-outline-secondary" (click)="add(content)"><i class="fa fa-plus"></i> {{'Add' | translate}}</button>
+                <!--<button class="btn btn-sm btn-outline-secondary">Export</button>-->
             </div>
             <div class="clearfix"></div>
         </div>
@@ -58,5 +58,3 @@
         </div>
     </div>
 </div>
-
-

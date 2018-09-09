@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateAdapter, NgbDateNativeAdapter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
@@ -30,6 +30,9 @@ import { HubsService } from "./_services/hubs.service";
 import { JournalService } from "./_services/journal.service";
 import { JournalDetailComponent } from './intervention/journal/journal-detail.component';
 import { QuillModule } from "ngx-quill";
+
+;
+import { AddJournalEntryComponent } from './intervention/journal/add-journal-entry.component'
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, "/assets/i18n/", ".json");
@@ -63,8 +66,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         InterventionsComponent,
         SidebarComponent,
         InterventionDetailComponent,
-        JournalDetailComponent
-    ],
+        JournalDetailComponent,
+        AddJournalEntryComponent],
     providers: [
         AuthGuard,
         AlertService,
@@ -77,7 +80,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         JournalService,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        { provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }
     ],
+    entryComponents: [AddJournalEntryComponent],
     bootstrap: [AppComponent]
 })
 
