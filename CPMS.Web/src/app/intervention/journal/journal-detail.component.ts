@@ -33,6 +33,6 @@ export class JournalDetailComponent implements OnInit {
     }
 
     add() {
-        this.modalService.open(AddJournalEntryComponent, {});
+        this.modalService.open(AddJournalEntryComponent, {size: 'lg'});
     }
 }

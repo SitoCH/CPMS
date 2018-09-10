@@ -41,3 +41,24 @@ a {
     margin-top: -8px;
 }
 
+.form-control {
+    border-radius: 0;
+}
+
+.ql-container.ql-snow.ql-disabled {
+    border: 0;
+}
+
+.ng-invalid:not(form):not(quill-editor)  {
+    border: 1px solid #a94442; /* red */
+}
+
+.ng-invalid > .ql-container.ql-snow  {
+    border: 1px solid #a94442; /* red */
+}
+
+.ng-invalid > .ql-toolbar.ql-snow  {
+    border-bottom: 1px solid #a94442; /* red */
+}
+
+

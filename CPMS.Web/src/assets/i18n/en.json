@@ -26,5 +26,7 @@
     "Mobile": "Mobile",
     "Phone": "Phone",
     "Channel": "Channel",
-    "Id": "Id"
+    "Id": "Id",
+    "Message": "Message",
+    "NewMessage": "New message"
 }

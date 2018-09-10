@@ -3,6 +3,7 @@ import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { JournalService } from "../../_services/journal.service";
 import { JournalEntryChannelDto } from "../../_models/journalEntryChannelDto";
+import { JournalEntryDto } from "../../_models/journalEntryDto";
 
 @Component({
     selector: 'app-add-journal-entry',
@@ -17,10 +18,15 @@ export class AddJournalEntryComponent implements OnInit {
     constructor(public activeModal: NgbActiveModal,
                 private formBuilder: FormBuilder,
                 private journalService: JournalService) {
+
+        let now = new Date();
+
         this.addForm = this.formBuilder.group({
             from: ['', Validators.required],
-            date: [new Date(), Validators.required],
-            text: ['', Validators.required],
+            date: [now, Validators.required],
+            hours: [now.getHours(), [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+            minutes: [now.getMinutes(), [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+            message: ['', Validators.required],
             channel: [null, Validators.required],
             direction: [0, Validators.required]
         });
@@ -35,7 +41,6 @@ export class AddJournalEntryComponent implements OnInit {
 
     add() {
         if (this.addForm.invalid) {
-            this.addForm.reset();
             return;
         }
 
