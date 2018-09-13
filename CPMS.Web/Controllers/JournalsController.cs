@@ -45,6 +45,16 @@ namespace CPMS.Web.Controllers
             await _interventionHub.Clients.All.SendAsync("journalUpdated", interventionId, newJournal.Id);
         }
 
+        [HttpPut("/Journals/AddEntry/{interventionId}/{journalId}")]
+        public async void AddJournalEntry(int interventionId, int journalId, [FromBody] NewJournalEntryDto newJournalEntry)
+        {
+            var entry = _mapper.Map<JournalEntry>(newJournalEntry);
+            entry.JournalId = journalId;
+            _journalService.AddEntry(entry);
+            await _interventionHub.Clients.All.SendAsync("journalUpdated", interventionId, journalId);
+        }
+
+
         [HttpGet("/Journals/Detail/{interventionId}/{journalId}")]
         public ActionResult<JournalDetailDto> GetJournalDetail(int interventionId, int journalId)
         {
@@ -72,11 +82,10 @@ namespace CPMS.Web.Controllers
                 {
                     Id = x.Id,
                     JournalName = x.Journal.Name,
-                    Text = x.Text,
+                    Message = x.Message,
                     DateTime = x.DateTime,
-                    ChannelIcon = x.JournalEntryChannel.Icon,
-                    ChannelName = x.JournalEntryChannel.Name,
-                    Person = x.Person,
+                    ChannelId = x.JournalEntryChannel.Id,
+                    Name = x.Name,
                     Direction = x.Direction
                 }).OrderByDescending(x => x.DateTime).ToArray()
             };

@@ -30,9 +30,8 @@ import { HubsService } from "./_services/hubs.service";
 import { JournalService } from "./_services/journal.service";
 import { JournalDetailComponent } from './intervention/journal/journal-detail.component';
 import { QuillModule } from "ngx-quill";
-
-;
 import { AddJournalEntryComponent } from './intervention/journal/add-journal-entry.component'
+import { ChannelCellComponent } from './intervention/journal/channel-cell.component'
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, "/assets/i18n/", ".json");
@@ -67,7 +66,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         SidebarComponent,
         InterventionDetailComponent,
         JournalDetailComponent,
-        AddJournalEntryComponent],
+        AddJournalEntryComponent,
+        ChannelCellComponent],
     providers: [
         AuthGuard,
         AlertService,

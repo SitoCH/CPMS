@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { InterventionDto } from "../_models/interventionDto";
-import { InterventionDetailDto } from "../_models/interventionDetailDto";
 
 @Injectable()
 export class InterventionService {
@@ -15,7 +14,7 @@ export class InterventionService {
     }
 
     get(id: any) {
-        return this.http.get<InterventionDetailDto>(`${environment.apiUrl}/interventions/${id}`);
+        return this.http.get<InterventionDto>(`${environment.apiUrl}/interventions/${id}`);
     }
 
     add(intervention: InterventionDto) {

@@ -22,6 +22,8 @@ namespace CPMS.Common.EF
 
         public DbSet<Journal> Journals { get; set; }
 
+        public DbSet<JournalEntry> JournalEntries { get; set; }
+
         public DbSet<JournalEntryChannel> JournalEntryChannels { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -170,8 +172,8 @@ namespace CPMS.Common.EF
                 {
                     Id = 1,
                     JournalEntryChannelId = 2,
-                    Text = "Inizio esercizio",
-                    Person = "SM PCi",
+                    Message = "Inizio esercizio",
+                    Name = "SM PCi",
                     DateTime = new DateTime(2018, 2, 2, 8, 30, 0),
                     JournalId = 1
                 },
@@ -179,8 +181,8 @@ namespace CPMS.Common.EF
                 {
                     Id = 2,
                     JournalEntryChannelId = 1,
-                    Text = "Messaggio PC fronte 1",
-                    Person = "144",
+                    Message = "Messaggio PC fronte 1",
+                    Name = "144",
                     DateTime = new DateTime(2018, 2, 2, 8, 36, 0),
                     JournalId = 1
                 },
@@ -188,8 +190,8 @@ namespace CPMS.Common.EF
                 {
                     Id = 3,
                     JournalEntryChannelId = 1,
-                    Text = "Messaggio PC fronte 2",
-                    Person = "117",
+                    Message = "Messaggio PC fronte 2",
+                    Name = "117",
                     Direction = JournalEntryDirection.Outgoing,
                     DateTime = new DateTime(2018, 2, 2, 8, 42, 0),
                     JournalId = 1
@@ -198,8 +200,8 @@ namespace CPMS.Common.EF
                 {
                     Id = 4,
                     JournalEntryChannelId = 3,
-                    Text = "Messaggio <b>PC fronte</b> 3",
-                    Person = "117",
+                    Message = "Messaggio <b>PC fronte</b> 3",
+                    Name = "117",
                     DateTime = new DateTime(2018, 2, 2, 8, 45, 0),
                     JournalId = 1
                 },
@@ -207,8 +209,8 @@ namespace CPMS.Common.EF
                 {
                     Id = 5,
                     JournalEntryChannelId = 2,
-                    Text = "Inizio esercizio",
-                    Person = "SM PCi",
+                    Message = "Inizio esercizio",
+                    Name = "SM PCi",
                     DateTime = new DateTime(2018, 2, 2, 8, 25, 0),
                     JournalId = 2
                 },
@@ -216,8 +218,8 @@ namespace CPMS.Common.EF
                 {
                     Id = 6,
                     JournalEntryChannelId = 2,
-                    Text = "Messaggio PC retro 1",
-                    Person = "117",
+                    Message = "Messaggio PC retro 1",
+                    Name = "117",
                     DateTime = new DateTime(2018, 2, 2, 8, 38, 0),
                     JournalId = 2
                 },
@@ -225,8 +227,8 @@ namespace CPMS.Common.EF
                 {
                     Id = 7,
                     JournalEntryChannelId = 1,
-                    Text = "Messaggio PC retro 2",
-                    Person = "117",
+                    Message = "Messaggio PC retro 2",
+                    Name = "117",
                     Direction = JournalEntryDirection.Outgoing,
                     DateTime = new DateTime(2018, 2, 2, 8, 40, 0),
                     JournalId = 2
@@ -235,8 +237,8 @@ namespace CPMS.Common.EF
                 {
                     Id = 8,
                     JournalEntryChannelId = 1,
-                    Text = "Messaggio PC retro 3",
-                    Person = "144",
+                    Message = "Messaggio PC retro 3",
+                    Name = "144",
                     DateTime = new DateTime(2018, 2, 2, 8, 40, 0),
                     JournalId = 2
                 },
@@ -244,16 +246,16 @@ namespace CPMS.Common.EF
                 {
                     Id = 9,
                     JournalEntryChannelId = 2,
-                    Text = "Messaggio PC retro 4",
-                    Person = "Care team",
+                    Message = "Messaggio PC retro 4",
+                    Name = "Care team",
                     DateTime = new DateTime(2018, 2, 2, 8, 47, 0),
                     JournalId = 2
                 }, new JournalEntry
                 {
                     Id = 10,
                     JournalEntryChannelId = 2,
-                    Text = "<h1>Titolo</h1><div><br></div><div>Testo messaggio.</div><div><span style=\"color: rgb(230, 0, 0);\">Informazioni importanti:</span></div><div><br></div><ol><li>Info 1</li><li>Info 2</li><li>Info 3</li></ol><div><br></div><div><br></div>",
-                    Person = "Care team",
+                    Message = "<h1>Titolo</h1><div><br></div><div>Testo messaggio.</div><div><span style=\"color: rgb(230, 0, 0);\">Informazioni importanti:</span></div><div><br></div><ol><li>Info 1</li><li>Info 2</li><li>Info 3</li></ol><div><br></div><div><br></div>",
+                    Name = "Care team",
                     Direction = JournalEntryDirection.Outgoing,
                     DateTime = new DateTime(2018, 2, 2, 8, 50, 0),
                     JournalId = 2

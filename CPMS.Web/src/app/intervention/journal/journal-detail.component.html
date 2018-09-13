@@ -36,12 +36,12 @@
                             <i class="fa" ngClass="{{(item.direction == 0 ? 'fa-arrow-down' : 'fa-arrow-up')}}"></i> {{(item.direction == 0 ? 'Incoming' : 'Outgoing') | translate}}
                         </div>
                         <div class="col-sm-3">
-                            <i class="fa" ngClass="{{item.channelIcon}}"></i> {{item.channelName | translate}}
+                            <channel-cell [channelId]="item.channelId"></channel-cell>
                         </div>
                     </div>
                     <div class="row journal-row" [ngClass]="{'alternate-row': (index % 2 == 0)}">
                         <div class="col-sm-7">
-                            <b>{{'From' | translate}}</b> {{item.person}}
+                            <b>{{'From' | translate}}</b> {{item.name}}
                         </div>
                         <div class="col-sm-5" *ngIf="journalDetail.id == 0">
                             <b>{{'Journal' | translate}}</b> {{item.journalName}}
@@ -50,7 +50,7 @@
                     </div>
                     <div class="row journal-bottom-row" [ngClass]="{'alternate-row': (index % 2 == 0)}">
                         <div class="col">
-                            <quill-editor [(ngModel)]="item.text" [readOnly]="true" [modules]="{toolbar: false}"></quill-editor>
+                            <quill-editor [(ngModel)]="item.message" [readOnly]="true" [modules]="{toolbar: false}"></quill-editor>
                         </div>
                     </div>
                 </ng-container>

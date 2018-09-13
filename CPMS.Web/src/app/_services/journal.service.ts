@@ -2,17 +2,18 @@
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
-import { InterventionDto } from "../_models/interventionDto";
-import { InterventionDetailDto } from "../_models/interventionDetailDto";
 import { JournalDto } from "../_models/journalDto";
 import { JournalDetailDto } from "../_models/journalDetailDto";
 import { JournalEntryChannelDto } from "../_models/journalEntryChannelDto";
+import { NewJournalEntryDto } from "../_models/newJournalEntryDto";
+import { Cacheable } from "ngx-cacheable";
 
 @Injectable()
 export class JournalService {
     constructor(private http: HttpClient) {
     }
 
+    @Cacheable()
     getChannels() {
         return this.http.get<JournalEntryChannelDto[]>(`${environment.apiUrl}/journals/Channels`);
     }
@@ -27,5 +28,9 @@ export class JournalService {
 
     add(interventionId: number, journal: JournalDto) {
         return this.http.put(`${environment.apiUrl}/Journals/${interventionId}`, journal);
+    }
+
+    addEntry(interventionId: number, journalId: number, newEntry: NewJournalEntryDto) {
+        return this.http.put(`${environment.apiUrl}/Journals/AddEntry/${interventionId}/${journalId}`, newEntry);
     }
 }

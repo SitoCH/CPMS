@@ -13,6 +13,7 @@ namespace CPMS.Web.Helpers
             CreateMap<Journal, JournalDto>().ReverseMap();
             CreateMap<Journal, JournalDetailDto>().ReverseMap();
             CreateMap<JournalEntry, JournalEntryDto>().ReverseMap();
+            CreateMap<JournalEntry, NewJournalEntryDto>().ReverseMap();
         }
     }
 }

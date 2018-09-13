@@ -3,14 +3,16 @@ using System;
 using CPMS.Common.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CPMS.Common.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180913213142_JournalEntitiesRename")]
+    partial class JournalEntitiesRename
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,7 +121,7 @@ namespace CPMS.Common.Migrations
 
                     b.HasIndex("JournalId");
 
-                    b.ToTable("JournalEntries");
+                    b.ToTable("JournalEntry");
 
                     b.HasData(
                         new { Id = 1, DateTime = new DateTime(2018, 2, 2, 8, 30, 0, 0, DateTimeKind.Unspecified), Direction = 0, JournalEntryChannelId = 2, JournalId = 1, Message = "Inizio esercizio", Name = "SM PCi" },

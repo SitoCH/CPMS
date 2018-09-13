@@ -3,7 +3,7 @@
         <div class="breadcrumb-holder">
             <ol class="breadcrumb float-left">
                 <li class="breadcrumb-item"><a [routerLink]="['/interventions']">{{'Interventions' | translate}}</a></li>
-                <li class="breadcrumb-item active">{{intervention.intervention.name}}</li>
+                <li class="breadcrumb-item active">{{intervention.name}}</li>
             </ol>
             <div class="float-right">
                 <button class="btn btn-sm btn-outline-secondary" (click)="add(content)"><i class="fa fa-plus"></i> {{'Add' | translate}}</button>
@@ -35,13 +35,13 @@
                         <td>
                             {{'Combined' | translate}}
                         </td>
-                        <td><a [routerLink]="['/intervention', intervention.intervention.id, 'journal']">
+                        <td><a [routerLink]="['/intervention', intervention.id, 'journal']">
                             <i class="fa fa-search"></i>
                         </a>
                     </tr>
                     <tr *ngFor="let item of journals">
                         <td>{{item.name}}</td>
-                        <td><a [routerLink]="['/intervention', intervention.intervention.id, 'journal', item.id]">
+                        <td><a [routerLink]="['/intervention', intervention.id, 'journal', item.id]">
                             <i class="fa fa-search"></i>
                         </a>
                     </tr>

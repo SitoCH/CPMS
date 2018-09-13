@@ -16,6 +16,8 @@ namespace CPMS.Common.Services
         List<JournalEntryChannel> GetChannels();
 
         Journal Add(Journal journal);
+
+        void AddEntry(JournalEntry entry);
     }
 
     public class JournalService : IJournalService
@@ -58,6 +60,12 @@ namespace CPMS.Common.Services
             var newJournal = _context.Journals.Add(journal);
             _context.SaveChanges();
             return newJournal.Entity;
+        }
+
+        public void AddEntry(JournalEntry entry)
+        {
+            _context.JournalEntries.Add(entry);
+            _context.SaveChanges();
         }
     }
 }

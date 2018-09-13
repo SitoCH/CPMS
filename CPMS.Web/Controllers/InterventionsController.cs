@@ -31,12 +31,9 @@ namespace CPMS.Web.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<InterventionDetailDto> GetIntervention(int id)
+        public ActionResult<InterventionDto> GetIntervention(int id)
         {
-            return new InterventionDetailDto
-            {
-                Intervention = _mapper.Map<InterventionDto>(_interventionService.Get(id))
-            };
+            return _mapper.Map<InterventionDto>(_interventionService.Get(id));
         }
 
         [HttpPut]

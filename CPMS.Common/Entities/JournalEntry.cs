@@ -8,9 +8,9 @@ namespace CPMS.Common.Entities
 
         public DateTime DateTime { get; set; }
 
-        public string Text { get; set; }
+        public string Message { get; set; }
 
-        public string Person { get; set; }
+        public string Name { get; set; }
 
         public JournalEntryDirection Direction { get; set; }
 

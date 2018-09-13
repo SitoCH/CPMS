@@ -2,12 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { InterventionService } from "../_services/intervention.service";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { switchMap } from "rxjs/operators";
-import { InterventionDetailDto } from "../_models/interventionDetailDto";
 import { JournalService } from "../_services/journal.service";
 import { JournalDto } from "../_models/journalDto";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { HubsService } from "../_services/hubs.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { InterventionDto } from "../_models/interventionDto";
 
 @Component({
     selector: 'intervention-detail',
@@ -16,7 +16,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 })
 export class InterventionDetailComponent implements OnInit, OnDestroy {
 
-    public intervention: InterventionDetailDto;
+    public intervention: InterventionDto;
     public journals: JournalDto[];
     public addForm: FormGroup;
 
@@ -42,7 +42,7 @@ export class InterventionDetailComponent implements OnInit, OnDestroy {
 
         this.hubsService.connect();
         this.hubsService.journalUpdated.subscribe(event => {
-            if (event.interventionId === this.intervention.intervention.id) {
+            if (event.interventionId === this.intervention.id) {
                 this.refreshJournals();
             }
         });
@@ -58,7 +58,7 @@ export class InterventionDetailComponent implements OnInit, OnDestroy {
     }
 
     private refreshJournals() {
-        this.journalService.getAllByIntervention(this.intervention.intervention.id).subscribe(journals => {
+        this.journalService.getAllByIntervention(this.intervention.id).subscribe(journals => {
             this.journals = journals;
         })
     }
@@ -69,7 +69,7 @@ export class InterventionDetailComponent implements OnInit, OnDestroy {
                 this.addForm.reset();
                 return;
             }
-            this.journalService.add(this.intervention.intervention.id, {
+            this.journalService.add(this.intervention.id, {
                 id: 0,
                 name: this.addForm.controls.name.value
             }).subscribe(() => {

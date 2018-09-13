@@ -3,7 +3,6 @@ import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { JournalService } from "../../_services/journal.service";
 import { JournalEntryChannelDto } from "../../_models/journalEntryChannelDto";
-import { JournalEntryDto } from "../../_models/journalEntryDto";
 
 @Component({
     selector: 'app-add-journal-entry',
@@ -14,6 +13,8 @@ export class AddJournalEntryComponent implements OnInit {
 
     public addForm: FormGroup;
     public channels: JournalEntryChannelDto[];
+    public interventionId: number;
+    public journalId: number;
 
     constructor(public activeModal: NgbActiveModal,
                 private formBuilder: FormBuilder,
@@ -22,7 +23,7 @@ export class AddJournalEntryComponent implements OnInit {
         let now = new Date();
 
         this.addForm = this.formBuilder.group({
-            from: ['', Validators.required],
+            name: ['', Validators.required],
             date: [now, Validators.required],
             hours: [now.getHours(), [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
             minutes: [now.getMinutes(), [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
@@ -44,14 +45,20 @@ export class AddJournalEntryComponent implements OnInit {
             return;
         }
 
-        /*this.journalService.add(this.intervention.intervention.id, {
-    id: 0,
-    name: this.addForm.controls.name.value
-}).subscribe(() => {
-    this.addForm.reset();
-});*/
+        let date: Date = this.addForm.controls.date.value;
+        date.setHours(this.addForm.controls.hours.value);
+        date.setMinutes(this.addForm.controls.minutes.value);
 
-        this.activeModal.close();
+        this.journalService.addEntry(this.interventionId, this.journalId, {
+            name: this.addForm.controls.name.value,
+            dateTime: date,
+            direction: this.addForm.controls.direction.value,
+            journalEntryChannelId: this.addForm.controls.channel.value,
+            message: this.addForm.controls.message.value
+        }).subscribe(() => {
+            this.activeModal.close();
+        });
+
     }
 
 }
