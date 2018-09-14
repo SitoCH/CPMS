@@ -4,11 +4,13 @@
             <ol class="breadcrumb float-left">
                 <li class="breadcrumb-item"><a [routerLink]="['/interventions']">{{'Interventions' | translate}}</a></li>
                 <li class="breadcrumb-item"><a [routerLink]="['/intervention', journalDetail.intervention.id]">{{journalDetail.intervention.name}}</a></li>
-                <li class="breadcrumb-item active" *ngIf="journalDetail.id > 0">{{journalDetail.name}}</li>
-                <li class="breadcrumb-item active" *ngIf="journalDetail.id == 0">{{'Combined' | translate}}</li>
+                <li class="breadcrumb-item active" *ngIf="!isCombinedJournal">{{journalDetail.name}}</li>
+                <li class="breadcrumb-item active" *ngIf="isCombinedJournal">{{'Combined' | translate}}</li>
             </ol>
             <div class="float-right">
-                <button *ngIf="journalDetail.id != 0" class="btn btn-sm btn-outline-secondary" (click)="add(content)"><i class="fa fa-plus"></i> {{'Add' | translate}}</button>
+                <button *ngIf="!isCombinedJournal" class="btn btn-sm btn-outline-secondary" (click)="add()">
+                    <i class="fa fa-plus"></i><span class="d-none d-sm-inline"> {{'Add' | translate}}</span>
+                </button>
                 <!--<button class="btn btn-sm btn-outline-secondary">Export</button>-->
             </div>
             <div class="clearfix"></div>
@@ -24,6 +26,10 @@
             </div>
 
             <div class="card-body">
+                <div *ngIf="!journalDetail">
+                    <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+                </div>
+
                 <ng-container *ngFor="let item of journalDetail.entries; let index = index;">
                     <div class="row journal-row" [ngClass]="{'alternate-row': (index % 2 == 0)}">
                         <div class="col-sm-2">
@@ -43,7 +49,7 @@
                         <div class="col-sm-7">
                             <b>{{'From' | translate}}</b> {{item.name}}
                         </div>
-                        <div class="col-sm-5" *ngIf="journalDetail.id == 0">
+                        <div class="col-sm-5" *ngIf="isCombinedJournal">
                             <b>{{'Journal' | translate}}</b> {{item.journalName}}
                         </div>
 

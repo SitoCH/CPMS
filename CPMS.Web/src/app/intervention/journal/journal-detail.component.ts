@@ -17,6 +17,7 @@ import { HubsService } from "../../_services/hubs.service";
 export class JournalDetailComponent implements OnInit, OnDestroy {
 
     public journalDetail: JournalDetailDto;
+    public isCombinedJournal: boolean;
 
     constructor(private route: ActivatedRoute,
                 private modalService: NgbModal,
@@ -31,6 +32,7 @@ export class JournalDetailComponent implements OnInit, OnDestroy {
             }))
             .subscribe(journalDetail => {
                 this.journalDetail = journalDetail;
+                this.isCombinedJournal = journalDetail.id == 0;
             });
 
         this.hubsService.connect();

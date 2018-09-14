@@ -6,7 +6,9 @@
                 <li class="breadcrumb-item active">{{intervention.name}}</li>
             </ol>
             <div class="float-right">
-                <button class="btn btn-sm btn-outline-secondary" (click)="add(content)"><i class="fa fa-plus"></i> {{'Add' | translate}}</button>
+                <button class="btn btn-sm btn-outline-secondary" (click)="add(content)">
+                    <i class="fa fa-plus"></i><span class="d-none d-sm-inline"> {{'Add' | translate}}</span>
+                </button>
                 <!--<button class="btn btn-sm btn-outline-secondary">Export</button>-->
             </div>
             <div class="clearfix"></div>
