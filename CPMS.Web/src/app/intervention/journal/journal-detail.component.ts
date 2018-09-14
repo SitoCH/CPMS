@@ -25,6 +25,14 @@ export class JournalDetailComponent implements OnInit, OnDestroy {
                 private hubsService: HubsService) {
     }
 
+    private shouldRefresh(updatedInterventionId: number, updatedJournalId: number) {
+        if (this.isCombinedJournal) {
+            return this.journalDetail.intervention.id == updatedInterventionId;
+        }
+
+        return this.journalDetail.id == updatedJournalId;
+    }
+
     ngOnInit() {
         this.route.paramMap.pipe(
             switchMap((params: ParamMap) => {
@@ -37,8 +45,8 @@ export class JournalDetailComponent implements OnInit, OnDestroy {
 
         this.hubsService.connect();
         this.hubsService.journalUpdated.subscribe(event => {
-            if (this.journalDetail && event.journalId === this.journalDetail.id) {
-                this.journalService.getJournalDetail(event.interventionId, event.journalId)
+            if (this.journalDetail && this.shouldRefresh(event.interventionId, event.journalId)) {
+                this.journalService.getJournalDetail(event.interventionId, this.isCombinedJournal ? 0 : event.journalId)
                     .subscribe(journalDetail => {
                         this.journalDetail = journalDetail;
                     });
