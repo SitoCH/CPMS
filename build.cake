@@ -8,7 +8,7 @@
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
-var isMasterBranch = StringComparer.OrdinalIgnoreCase.Equals("master", BuildSystem.TFBuild.Environment.Repository.Branch));
+var isMasterBranch = StringComparer.OrdinalIgnoreCase.Equals("master", BuildSystem.TFBuild.Environment.Repository.Branch);
 
 //////////////////////////////////////////////////////////////////////
 // PREPARATION
