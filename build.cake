@@ -8,6 +8,7 @@
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
+var isMasterBranch = StringComparer.OrdinalIgnoreCase.Equals("master", BuildSystem.TFBuild.Environment.Repository.Branch));
 
 //////////////////////////////////////////////////////////////////////
 // PREPARATION
@@ -108,6 +109,7 @@ Task("DotNetCorePublish")
 
 Task("DockerBuild")
 .IsDependentOn("DotNetCorePublish")
+.WithCriteria(isMasterBranch)
 .Does(() => {
      var settings = new DockerImageBuildSettings
      {
@@ -120,6 +122,7 @@ Task("DockerBuild")
 Task("DockerLogin")
 .IsDependentOn("DockerBuild")
 .WithCriteria(TFBuild.IsRunningOnVSTS)
+.WithCriteria(isMasterBranch)
 .Does(() => {
     var dockerUsername = EnvironmentVariable("DOCKER_USERNAME");
     var dockerPassword = EnvironmentVariable("DOCKER_PASSWORD");
@@ -132,6 +135,7 @@ Task("DockerLogin")
 Task("DockerPush")
 .IsDependentOn("DockerLogin")
 .WithCriteria(TFBuild.IsRunningOnVSTS)
+.WithCriteria(isMasterBranch)
 .Does(() => {
     DockerPush("sito/cpms");
 });
