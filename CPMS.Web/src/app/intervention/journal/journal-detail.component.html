@@ -1,17 +1,19 @@
 <div class="row page-title-row">
     <div class="col-xl-12">
         <div class="breadcrumb-holder">
-            <ol class="breadcrumb float-left">
+            <ol class="breadcrumb float-left" *ngIf="!loading">
                 <li class="breadcrumb-item"><a [routerLink]="['/interventions']">{{'Interventions' | translate}}</a></li>
                 <li class="breadcrumb-item"><a [routerLink]="['/intervention', journalDetail.intervention.id]">{{journalDetail.intervention.name}}</a></li>
                 <li class="breadcrumb-item active" *ngIf="!isCombinedJournal">{{journalDetail.name}}</li>
                 <li class="breadcrumb-item active" *ngIf="isCombinedJournal">{{'Combined' | translate}}</li>
             </ol>
-            <div class="float-right">
+            <div class="page-title-row-buttons float-right">
                 <button *ngIf="!isCombinedJournal" class="btn btn-sm btn-outline-secondary" (click)="add()">
                     <i class="fa fa-plus"></i><span class="d-none d-sm-inline"> {{'Add' | translate}}</span>
                 </button>
-                <!--<button class="btn btn-sm btn-outline-secondary">Export</button>-->
+                <button class="btn btn-sm btn-outline-secondary" (click)="exportToExcel()">
+                    <i class="fa fa-file-excel-o"></i><span class="d-none d-sm-inline"> {{'Export' | translate}}</span>
+                </button>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -26,7 +28,7 @@
             </div>
 
             <div class="card-body">
-                <div *ngIf="!journalDetail">
+                <div *ngIf="loading">
                     <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
                 </div>
 

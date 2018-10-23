@@ -20,6 +20,10 @@ a {
     text-decoration: none;
 }
 
+.page-title-row-buttons > button:not(:last-child) {
+    margin-right: 5px;
+}
+
 .breadcrumb-holder {
     background-color: #ffffff;
     margin: 0 -20px 20px -13px;
@@ -49,15 +53,15 @@ a {
     border: 0;
 }
 
-.ng-invalid:not(form):not(quill-editor)  {
+.ng-invalid:not(form):not(quill-editor) {
     border: 1px solid #a94442; /* red */
 }
 
-.ng-invalid > .ql-container.ql-snow  {
+.ng-invalid > .ql-container.ql-snow {
     border: 1px solid #a94442; /* red */
 }
 
-.ng-invalid > .ql-toolbar.ql-snow  {
+.ng-invalid > .ql-toolbar.ql-snow {
     border-bottom: 1px solid #a94442; /* red */
 }
 

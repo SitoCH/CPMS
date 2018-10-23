@@ -50,7 +50,8 @@
         "typescript": "^2.9.2",
         "zone.js": "^0.8.26",
         "ngx-quill": "^3.4.0",
-        "ngx-cacheable": "^1.0.6"
+        "ngx-cacheable": "^1.0.6",
+        "exceljs": "^1.6.2"
     },
     "devDependencies": {}
 }

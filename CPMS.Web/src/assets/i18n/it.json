@@ -28,5 +28,6 @@
     "Channel": "Canale",
     "Id": "Id",
     "Message": "Messaggio",
-    "NewMessage": "Nuovo messaggio"
+    "NewMessage": "Nuovo messaggio",
+    "Export": "Esporta"
 }
